@@ -3,7 +3,7 @@ import Navbar from '~/components/Navbar';
 const Home = () => {
   return (
     <div className="">
-        Home
+        Home của Tuân
         <Navbar/>
     </div>
   )
