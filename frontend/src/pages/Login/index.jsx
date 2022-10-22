@@ -7,7 +7,7 @@ const Login = () => {
     <div className={cx("login-container")}>
       <div className={cx("login-wrapper")}>
         <h1 className={cx("login-title")}>SIGN IN</h1>
-        <form className={cx("login-form")}>
+        <form action="post" className={cx("login-form")}>
           <input className={cx("login-input")} placeholder="password" />
           <input className={cx("login-input")} placeholder="username" />
           <button className={cx("login-button")}>SIGN IN</button>
