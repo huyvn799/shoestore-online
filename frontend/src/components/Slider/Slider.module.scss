@@ -1,9 +1,14 @@
+@import "../../Variable/_responsive.module";
+
 .slider-container {
   width: 100%;
   height: 100vh;
   display: flex;
   position: relative;
   overflow: hidden;
+  @include mobile {
+    display: none;
+  }
 
   .slider-arrow {
     width: 50px;

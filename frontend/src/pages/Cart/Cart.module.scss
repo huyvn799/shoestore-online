@@ -1,6 +1,11 @@
+@import "../../Variable/responsive.module";
+
 .cart-container {
   .cart-wrapper {
     padding: 20px;
+    @include mobile {
+      padding: 10px;
+    }
     .cart-title {
       font-weight: 300;
       text-align: center;
@@ -22,6 +27,9 @@
         }
       }
       .cart-top__texts {
+        @include mobile {
+          display: none;
+        }
         .cart-top__texts__text {
           text-decoration: underline;
           cursor: pointer;
@@ -32,6 +40,9 @@
     .cart-bottom {
       display: flex;
       justify-content: space-between;
+      @include mobile {
+        flex-direction: column;
+      }
       .cart-info {
         flex: 3;
       }

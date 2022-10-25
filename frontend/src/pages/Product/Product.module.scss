@@ -1,18 +1,30 @@
+@import "../../Variable/responsive.module";
+
 .product-container {
   .product-wrapper {
     padding: 50px;
     display: flex;
+    @include mobile {
+      padding: 10px;
+      flex-direction: column;
+    }
     .product-imgContainer {
       flex: 1;
       .product-image {
         width: 100%;
         height: 90vh;
         object-fit: cover;
+        @include mobile {
+          height: 40vh;
+        }
       }
     }
     .product-infoContainer {
       flex: 1;
       padding: 0px 50px;
+      @include mobile {
+        padding: 10px;
+      }
       .product-info__title {
         font-weight: 200;
       }
@@ -28,6 +40,9 @@
         margin: 30px 0px;
         display: flex;
         justify-content: space-between;
+        @include mobile {
+          width: 100%;
+        }
         .product-info__filter {
           display: flex;
           align-items: center;
@@ -66,6 +81,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include mobile {
+          width: 100%;
+        }
         .product-info__amountContainer {
           display: flex;
           align-items: center;

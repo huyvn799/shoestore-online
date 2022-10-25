@@ -1,3 +1,5 @@
+@import "../../Variable/_responsive.module";
+
 .login-container {
   width: 100vw;
   height: 100vh;
@@ -15,6 +17,9 @@
     width: 25%;
     padding: 20px;
     background-color: white;
+    @include mobile {
+      width: 75%;
+    }
     .login-title {
       font-size: 24px;
       font-weight: 300;

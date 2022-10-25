@@ -13,7 +13,11 @@ const Navbar = () => {
         <div className={cx("nav-left")}>
           <span className={cx("nav-language")}>EN</span>
           <div className={cx("nav-search_container")}>
-            <input className={cx("nav-search_input")} type="text" />
+            <input
+              placeholder="Search"
+              className={cx("nav-search_input")}
+              type="text"
+            />
             <Search style={{ color: "gray", fontSize: 16 }} />
           </div>
         </div>
@@ -21,9 +25,9 @@ const Navbar = () => {
           <h1 className={cx("nav-logo")}>TuanStore</h1>
         </div>
         <div className={cx("nav-right")}>
-          <div className={cx("nav-menu_item")}>REGISTER</div>
-          <div className={cx("nav-menu_item")}>SIGN IN</div>
-          <div className={cx("nav-menu_item")}>
+          <div className={cx("nav-menu__item")}>REGISTER</div>
+          <div className={cx("nav-menu__item")}>SIGN IN</div>
+          <div className={cx("nav-menu__item")}>
             <Badge badgeContent={4} color="primary">
               <ShoppingCartOutlined />
             </Badge>

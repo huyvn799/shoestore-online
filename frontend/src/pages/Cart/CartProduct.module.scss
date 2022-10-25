@@ -1,6 +1,11 @@
+@import "../../Variable/responsive.module";
+
 .cart-product {
   display: flex;
   justify-content: space-between;
+  @include mobile {
+    flex-direction: column;
+  }
   .cart-product__detail {
     flex: 2;
     display: flex;
@@ -34,11 +39,17 @@
       .cart-product__productAmount {
         font-size: 24px;
         margin: 5px;
+        @include mobile {
+          margin: 5px 15px;
+        }
       }
     }
     .cart-product__price {
       font-size: 30px;
       font-weight: 200;
+      @include mobile {
+        margin-bottom: 20px;
+      }
     }
   }
 }

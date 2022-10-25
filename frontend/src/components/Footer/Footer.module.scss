@@ -1,5 +1,11 @@
+@import "../../Variable/_responsive.module";
+
 .footer-container {
   display: flex;
+  @include mobile {
+    flex-direction: column;
+  }
+
   .footer-left {
     flex: 1;
     display: flex;
@@ -40,6 +46,10 @@
   .footer-center {
     flex: 1;
     padding: 20px;
+    @include mobile {
+      display: none;
+    }
+
     .footer-title {
       margin-bottom: 30px;
     }
@@ -58,6 +68,10 @@
   .footer-right {
     flex: 1;
     padding: 20px;
+    @include mobile {
+      background-color: #fff8f8;
+    }
+
     .footer-title {
       margin-bottom: 30px;
     }
