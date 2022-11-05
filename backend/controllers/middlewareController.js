@@ -3,7 +3,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
 const middlewareController = {
-    // verifyToken
+    // verifyToken: xác nhận user
     verifyToken: async (req, res, next) => {
         const authTokenHeader = req.headers.token;
         if (authTokenHeader) {
@@ -42,8 +42,8 @@ const middlewareController = {
         });
     },
 
+    // chỉ dành cho admin
     verifyTokenOnlyAdmin: async (req, res, next) => {
-        
         middlewareController.verifyToken(req, res, () => {
             if (req.user.isAdmin) {
                 

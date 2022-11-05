@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
+const cartRoute = require("./routes/cart");
+const orderRoute = require("./routes/order");
 const User = require("./models/User");
 
 dotenv.config();
@@ -26,6 +28,8 @@ app.use(express.json())
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/carts", cartRoute);
+app.use("/api/orders", orderRoute);
 
 // const test = async (req, res) => {
 //   const date = new Date();
@@ -53,8 +57,6 @@ app.use("/api/products", productRoute);
 // }
 
 // test();
-
-
 
 
 app.listen(process.env.PORT || 5000, () => {
