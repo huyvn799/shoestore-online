@@ -1,9 +1,4 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-# fix yarn: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-# scss: import classNames from "classnames/bind";
-#       import styles from "./Navbar.module.scss";
-#       const cx = classNames.bind(styles);
-
 
 # dependencies
 /node_modules
