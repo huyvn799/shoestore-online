@@ -1,0 +1,63 @@
+@import "../../Variable/responsive.module";
+
+.cart-container {
+  .cart-wrapper {
+    padding: 20px;
+    @include mobile {
+      padding: 10px;
+    }
+    .cart-title {
+      font-weight: 300;
+      text-align: center;
+    }
+    .cart-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      .cart-top__button {
+        padding: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: transparent;
+        &--filled {
+          border: none;
+          background-color: black;
+          color: white;
+        }
+      }
+      .cart-top__texts {
+        @include mobile {
+          display: none;
+        }
+        .cart-top__texts__text {
+          text-decoration: underline;
+          cursor: pointer;
+          margin: 0px 10px;
+        }
+      }
+    }
+    .cart-bottom {
+      display: flex;
+      justify-content: space-between;
+      @include mobile {
+        flex-direction: column;
+      }
+      .cart-info {
+        flex: 3;
+      }
+      .cart-line {
+        background-color: #eee;
+        border: none;
+        height: 1px;
+      }
+      .cart-summary__container {
+        flex: 1;
+        border: 0.5px solid lightgray;
+        border-radius: 10px;
+        padding: 20px;
+        height: 50vh;
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import "../../Variable/_responsive.module";
+
+.newsLetter-container {
+  height: 60vh;
+  background-color: #fcf5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .newsLetter-title {
+    font-size: 70px;
+    margin-bottom: 20px;
+  }
+  .newsLetter-description {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    @include mobile {
+      text-align: center;
+    }
+  }
+  .newsLetter-inputContainer {
+    width: 50%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid lightgray;
+    @include mobile {
+      width: 80%;
+    }
+
+    .newsLetter-inputContainer__input {
+      border: none;
+      flex: 8;
+      padding-left: 20px;
+    }
+    .newsLetter-inputContainer__button {
+      flex: 1;
+      border: none;
+      background-color: teal;
+      color: white;
+    }
+  }
+}
