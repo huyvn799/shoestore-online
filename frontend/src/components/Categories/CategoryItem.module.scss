@@ -1,0 +1,39 @@
+@import "../../Variable/_responsive.module";
+
+.categoryItem-container {
+  flex: 1;
+  margin: 3px;
+  height: 70vh;
+  position: relative;
+  .categoryItem-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    @include mobile {
+      height: 20vh;
+    }
+  }
+  .categoryItem-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .categoryItem-title {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .categoryItem-button {
+      border: none;
+      padding: 10px;
+      background-color: white;
+      color: gray;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+}
