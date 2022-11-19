@@ -4,7 +4,6 @@ import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import Navbar from "~/components/Navbar";
 import Announcement from "~/components/Announcement";
-import Products from "~/components/Products";
 import Newsletter from "~/components/Newsletter";
 import Footer from "~/components/Footer";
 import { Add, Remove } from "@material-ui/icons";
@@ -19,7 +18,7 @@ const Product = () => {
         <div className={cx("product-imgContainer")}>
           <img
             className={cx("product-image")}
-            src="https://i.ibb.co/S6qMxwr/jean.jpg"
+            src="https://file.hstatic.net/1000061481/file/giay_da_bong_asics-ds-light-3-wide-5__14__9574aa720a38479db98bdccddedb04c8.jpg"
             alt="logo"
           />
         </div>
