@@ -1,24 +1,24 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-4.jpg",
-    title: "Giay no1",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/13457494/pexels-photo-13457494.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    title: "Nike Jordan",
+    desc: "Line of products pursued by young people",
     bg: "#f5fafd",
     // bg: "red",
   },
   {
     id: 2,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-5.png",
-    title: "Giay no2",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/8378567/pexels-photo-8378567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "Adidas Satan Smith",
+    desc: "Wonderful choice for running or training",
     bg: "#fcf1ed",
   },
   {
     id: 3,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-8.jpg",
-    title: "Giay no3",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/5967666/pexels-photo-5967666.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "Puma Suede",
+    desc: "Elegant and eye-catching design",
     bg: "#f5fafd",
   },
 ];
@@ -26,18 +26,21 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "SHIRT STYLE!",
+    img: "https://images.pexels.com/photos/10077934/pexels-photo-10077934.jpeg?cs=srgb&dl=pexels-talal-hakim-10077934.jpg&fm=jpg",
+    title: "FOR MEN",
+    category: "men"
   },
   {
     id: 2,
-    img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "LOUNGEWEAR LOVE",
+    img: "https://images.pexels.com/photos/10822324/pexels-photo-10822324.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "FOR WOMEN",
+    category: "women"
   },
   {
     id: 3,
-    img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    title: "LIGHT JACKETS",
+    img: "https://images.pexels.com/photos/9961401/pexels-photo-9961401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "FOR UNISEX",
+    category: "unisex"
   },
 ];
 
@@ -56,7 +59,7 @@ export const popularProducts = [
   },
   {
     id: 4,
-    img: "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
+    img: "https://images.pexels.com/photos/9214280/pexels-photo-9214280.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 5,

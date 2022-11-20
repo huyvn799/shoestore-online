@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <div className={cx("footer-container")}>
       <div className={cx("footer-left")}>
-        <h1 className={cx("footer-logo")}>TuanStore</h1>
+        <h1 className={cx("footer-logo")}>SPORTY SHOE.</h1>
         <p className={cx("footer-desc")}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
           voluptate quidem ex beatae? Neque dignissimos error accusantium

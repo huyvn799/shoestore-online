@@ -38,6 +38,7 @@ const Slider = () => {
             img={items.img}
             title={items.title}
             desc={items.desc}
+            id={items.id}
           />
         ))}
       </div>

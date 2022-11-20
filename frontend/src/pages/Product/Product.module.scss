@@ -54,17 +54,41 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-
+            box-shadow: 0 0 3px #000;
             margin: 0px 5px;
             cursor: pointer;
             &--black {
               background-color: black;
             }
-            &--darkblue {
-              background-color: darkblue;
+            &--blue {
+              background-color: blue;
+            }
+            &--red {
+              background-color: red;
+            }
+            &--orange {
+              background-color: orange;
+            }
+            &--yellow {
+              background-color: yellow;
+            }
+            &--white {
+              background-color: white;
+            }
+            &--purple {
+              background-color: purple;
+            }
+            &--pink {
+              background-color: pink;
+            }
+            &--green {
+              background-color: green;
             }
             &--gray {
               background-color: gray;
+            }
+            &--active {
+              border: 1px solid teal;
             }
           }
           .product-info__filter__size {
@@ -88,7 +112,8 @@
           display: flex;
           align-items: center;
           font-weight: 700;
-          .product-info__amount {
+          .product-info__amount,
+          .product-info__amountBtn {
             width: 30px;
             height: 30px;
             border-radius: 10px;
@@ -98,6 +123,15 @@
             justify-content: center;
             margin: 0px 5px;
           }
+
+          .product-info__amountBtn {
+            cursor: pointer;
+            &:hover {
+              border-color: #000;
+              background-color: teal;
+              color: white
+            }
+          }
         }
         .product-info__button {
           padding: 15px;
@@ -106,7 +140,9 @@
           cursor: pointer;
           font-weight: 500;
           &:hover {
-            background-color: #f8f4f4;
+            border-color: #000;
+            background-color: teal;
+            color: white;
           }
         }
       }

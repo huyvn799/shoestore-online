@@ -1,4 +1,4 @@
-import React from "react";
+import { memo, useEffect, useState } from "react";
 import styles from "./Product.module.scss";
 import classNames from "classnames/bind";
 import {
@@ -6,9 +6,13 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { publicRequest } from "~/requestMethod";
+
 const cx = classNames.bind(styles);
 
 const Product = ({ item }) => {
+
   return (
     <div className={cx("product-container")}>
       <div className={cx("product-circle")}></div>
@@ -17,9 +21,11 @@ const Product = ({ item }) => {
         <div className={cx("product-icon")}>
           <ShoppingCartOutlined />
         </div>
-        <div className={cx("product-icon")}>
-          <SearchOutlined />
-        </div>
+        <Link to={`/product/${item._id}`}>
+          <div className={cx("product-icon")}>
+            <SearchOutlined />
+          </div>
+        </Link>
         <div className={cx("product-icon")}>
           <FavoriteBorderOutlined />
         </div>
@@ -28,4 +34,4 @@ const Product = ({ item }) => {
   );
 };
 
-export default Product;
+export default memo(Product);
