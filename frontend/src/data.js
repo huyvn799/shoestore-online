@@ -1,24 +1,24 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-4.jpg",
-    title: "Giay no1",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/13457494/pexels-photo-13457494.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    title: "Nike Jordan",
+    desc: "Line of products pursued by young people",
     bg: "#f5fafd",
     // bg: "red",
   },
   {
     id: 2,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-5.png",
-    title: "Giay no2",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/8378567/pexels-photo-8378567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "Adidas Satan Smith",
+    desc: "Wonderful choice for running or training",
     bg: "#fcf1ed",
   },
   {
     id: 3,
-    img: "https://momoshop.com.vn/wp-content/uploads/2020/02/mau-giay-the-thao-nam-1-8.jpg",
-    title: "Giay no3",
-    desc: "Giay chat luong cao gia rer free ship",
+    img: "https://images.pexels.com/photos/5967666/pexels-photo-5967666.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "Puma Suede",
+    desc: "Elegant and eye-catching design",
     bg: "#f5fafd",
   },
 ];
@@ -26,18 +26,21 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "https://bucket.nhanh.vn/store/26181/pc/content386013/giay_da_bong_Nike_(1).jpg",
-    title: "Nike Shoes",
+    img: "https://images.pexels.com/photos/10077934/pexels-photo-10077934.jpeg?cs=srgb&dl=pexels-talal-hakim-10077934.jpg&fm=jpg",
+    title: "FOR MEN",
+    category: "men"
   },
   {
     id: 2,
-    img: "https://www.sport9.vn/images/uploaded/Adidas/x19.3%20blue/98319588_663806391128778_9052270783279136768_o.jpg",
-    title: "Adidas Shoes",
+    img: "https://images.pexels.com/photos/10822324/pexels-photo-10822324.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "FOR WOMEN",
+    category: "women"
   },
   {
     id: 3,
-    img: "http://giaydabanhfutsal.com/wp-content/uploads/2021/01/20210122_151219.jpg",
-    title: "Puma Shoes",
+    img: "https://images.pexels.com/photos/9961401/pexels-photo-9961401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "FOR UNISEX",
+    category: "unisex"
   },
 ];
 
@@ -56,7 +59,7 @@ export const popularProducts = [
   },
   {
     id: 4,
-    img: "https://nhiet.vn/wp-content/uploads/2018/06/Shop-gi%C3%A0y-th%E1%BB%83-thao-nam-gi%C3%A1-r%E1%BA%BB-H%C3%A0-N%E1%BB%99i-4.jpg",
+    img: "https://images.pexels.com/photos/9214280/pexels-photo-9214280.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 5,

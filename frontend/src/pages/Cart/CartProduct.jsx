@@ -3,36 +3,55 @@ import { Add, Remove } from "@material-ui/icons";
 
 import classNames from "classnames/bind";
 import styles from "./CartProduct.module.scss";
+import { useState } from "react";
 const cx = classNames.bind(styles);
-const CartProduct = () => {
+
+const CartProduct = ({cartProduct}) => {
+  const [quantity, setQuantity] = useState(cartProduct.quantity)
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  }
   return (
     <div className={cx("cart-product")}>
       <div className={cx("cart-product__detail")}>
         <img
           className={cx("cart-info__image")}
-          src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A"
+          src={cartProduct.img}
           alt="logo"
         />
         <div className={cx("cart-info__details")}>
           <span>
-            <b>Product:</b> JESSIE THUNDER SHOES
+            <b>Product:</b> {cartProduct.title}
           </span>
           <span>
-            <b>ID:</b> 93813718293
+            <b>ID:</b> {cartProduct._id}
           </span>
-          <div className={cx("cart-product__color")}></div>
+          <span style={{ 
+            display: "flex",
+            alignItems: "center"
+           }}>
+            <b>Color: </b> 
+            <div 
+              className={cx("cart-product__color",
+                `cart-product__color--${cartProduct.color}`)}>
+            </div>
+          </span>
           <span>
-            <b>Size:</b> 37.5
+            <b>Size:</b> {cartProduct.size}
           </span>
         </div>
       </div>
       <div className={cx("cart-product__priceDetail")}>
         <div className={cx("cart-product__amountContainer")}>
-          <Add />
-          <div className={cx("cart-product__productAmount")}>2</div>
-          <Remove />
+          <Remove className={cx("cart-product__amountBtn")} onClick={() => handleQuantity("dec")}/>
+          <div className={cx("cart-product__productAmount")}>{quantity}</div>
+          <Add className={cx("cart-product__amountBtn")} onClick={() => handleQuantity("inc")}/>
         </div>
-        <div className={cx("cart-product__price")}>500.000 VND</div>
+        <div className={cx("cart-product__price")}>$ {cartProduct.quantity * cartProduct.price}</div>
       </div>
     </div>
   );

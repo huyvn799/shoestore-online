@@ -3,10 +3,14 @@ import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import classNames from "classnames/bind";
 import styles from "./Navbar.module.scss";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <div className={cx("nav-container")}>
       <div className={cx("nav-wrapper")}>
@@ -22,16 +26,24 @@ const Navbar = () => {
           </div>
         </div>
         <div className={cx("nav-center")}>
-          <h1 className={cx("nav-logo")}>TuanStore</h1>
+          <Link to="/">
+            <h1 className={cx("nav-logo")}>SPORTY SHOE.</h1>
+          </Link>
         </div>
         <div className={cx("nav-right")}>
-          <div className={cx("nav-menu__item")}>REGISTER</div>
-          <div className={cx("nav-menu__item")}>SIGN IN</div>
-          <div className={cx("nav-menu__item")}>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </div>
+          <Link to="/register">
+            <div className={cx("nav-menu__item")}>REGISTER</div>
+          </Link>
+          <Link to="/login">
+            <div className={cx("nav-menu__item")}>SIGN IN</div>
+          </Link>
+          <Link to="/cart">
+            <div className={cx("nav-menu__item")}>
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 const Announcement = () => {
   return (
     <div className={cx("announ-container")}>
-      Sieu uuw dai free ship voi hoa don tren 500k
+      Happy BlackFriday! Biggest sale of the year. Sale off to 80%
     </div>
   );
 };
