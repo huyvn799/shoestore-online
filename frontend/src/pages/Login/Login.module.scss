@@ -1,0 +1,53 @@
+@import "../../Variable/_responsive.module";
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("https://toigingiuvedep.vn/wp-content/uploads/2021/02/hinh-nen-ronaldo-cr7-dep-nhat.jpg")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .login-wrapper {
+    width: 25%;
+    padding: 20px;
+    background-color: white;
+    @include mobile {
+      width: 75%;
+    }
+    .login-title {
+      font-size: 24px;
+      font-weight: 300;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      .login-input {
+        flex: 1;
+        min-width: 40%;
+        margin: 10px 0;
+        padding: 10px;
+      }
+      .login-button {
+        width: 40%;
+        border: none;
+        padding: 15px 20px;
+        background-color: teal;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .login-link {
+        margin: 5px 0px;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

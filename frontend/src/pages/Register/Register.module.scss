@@ -1,0 +1,52 @@
+.register-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("https://ttthvietduc.vn/userdata/6926/wp-content/uploads/2021/08/messi-celebracion-gol-historia-216298-1599116276018754928580-0-0-428-685-crop-15991162896641336496972.jpeg")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .register-wrapper {
+    width: 40%;
+    padding: 20px;
+    background-color: white;
+    .register-title {
+      font-size: 24px;
+      font-weight: 300;
+    }
+    .register-form {
+      display: flex;
+      flex-wrap: wrap;
+      .register-input {
+        flex: 1;
+        min-width: 40%;
+        margin: 20px 10px 0px 0px;
+        padding: 10px;
+      }
+      .register-agreement {
+        font-size: 12px;
+        margin: 20px 0px;
+      }
+      .register-button {
+        width: 40%;
+        border: none;
+        padding: 15px 20px;
+        background-color: teal;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .register-link {
+        margin: 5px 0px;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

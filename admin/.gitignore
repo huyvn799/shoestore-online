@@ -4,7 +4,6 @@
 #       import styles from "./Navbar.module.scss";
 #       const cx = classNames.bind(styles);
 
-
 # dependencies
 /node_modules
 /.pnp
