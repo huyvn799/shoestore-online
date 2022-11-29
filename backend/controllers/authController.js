@@ -5,6 +5,18 @@ const jwt = require("jsonwebtoken");
 const authController = {
     // REGISTER
     registerUser: async (req, res) => {
+
+        const usernameDB = await User.findOne({ username: req.body.username });
+        const emailDB = await User.findOne({ email: req.body.email });
+
+        if (usernameDB) {
+            return res.status(404).json("This username has been registered");
+        }
+
+        if (emailDB) {
+            return res.status(404).json("This email has been registered");
+        }
+
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
@@ -54,6 +66,11 @@ const authController = {
         } catch (err) {
             res.status(500).json(err);
         }
+    },
+
+    // LOG OUT
+    logoutUser: async(req, res) => {
+        res.status(200).json('Logged out!');
     }
 }
 

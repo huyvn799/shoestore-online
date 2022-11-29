@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import logo from "../../img/logo.png";

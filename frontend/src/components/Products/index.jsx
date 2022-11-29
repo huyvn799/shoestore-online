@@ -76,17 +76,23 @@ const Products = ({ category, filters, sort }) => {
       {
         location.pathname.includes("products") ? 
         (
-          filteredProducts.map((item) => (
-            <Product item={item} key={item.id} />
+          filteredProducts?.map((item, index) => (
+            <div key={index}>
+              <Product item={item} />
+            </div>
           ))
-        ) : (
-          products.slice(0, 8).map((item) => (
-            <Product item={item} key={item.id} />
-          ))
-        )    
+        )
+        : 
+        (
+          products?.slice(0, 8).map((item, index) => (
+          <div key={index}>
+            <Product item={item} />
+          </div>
+        ))
+        )
       }
     </div>
-  );
-};
+  )
+}
 
 export default memo(Products);
