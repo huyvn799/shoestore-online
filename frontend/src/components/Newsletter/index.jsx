@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import classNames from "classnames/bind";
 import styles from "./Newsletter.module.scss";
 import { Send } from "@material-ui/icons";
