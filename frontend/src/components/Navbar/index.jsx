@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className={cx("nav-right")}>
           <div className={cx("nav-menu__item")}>
             <Badge badgeContent={quantity} color="primary">
-              <AccountCircleIcon />
+              <AccountCircleOutlined />
             </Badge>
             <div className={cx("nav-menu__dropdown-menu")}>
               <ul className={cx("nav-menu__dropdown-menu__Ul")}>
