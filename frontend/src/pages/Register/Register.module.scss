@@ -1,3 +1,4 @@
+@import "../../Variable/_responsive.module";
 .register-container {
   width: 100vw;
   height: 100vh;
@@ -12,7 +13,10 @@
   align-items: center;
   justify-content: center;
   .register-wrapper {
-    width: 40%;
+    @include mobile {
+      width: 100%;
+    }
+    width: 500px;
     padding: 20px;
     background-color: white;
     .register-title {
@@ -23,15 +27,33 @@
       display: flex;
       flex-wrap: wrap;
       .register-input {
-        flex: 1;
-        min-width: 40%;
-        margin: 20px 10px 0px 0px;
+        width: 100%;
+        //flex: 1;
+        //min-width: 40%;
+        border: none;
+        outline: none;
+        border: 1px solid #000;
+        border-radius: 3px;
+        margin-top: 20px;
         padding: 10px;
+
+        &:focus {
+          outline: 1px solid teal;
+          border-color: teal;
+        }
       }
       .register-agreement {
         font-size: 12px;
         margin: 20px 0px;
       }
+
+      .register-footer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+      }
+
       .register-button {
         width: 40%;
         border: none;
@@ -39,7 +61,6 @@
         background-color: teal;
         color: white;
         cursor: pointer;
-        margin-bottom: 10px;
       }
       .register-link {
         margin: 5px 0px;
