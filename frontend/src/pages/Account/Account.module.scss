@@ -1,0 +1,112 @@
+.account-container {
+  flex: 4;
+  .account-wrap {
+    padding: 20px;
+    margin-right: 200px;
+    .account-info {
+      border: 1px solid rgba(128, 128, 128, 0.5);
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-radius: 12px;
+
+      .account-info__personal {
+        padding: 12px;
+        flex: 4;
+        border-right: 1px solid rgba(128, 128, 128, 0.5);
+        margin-right: 24px;
+        // background-color: red;
+        .account-info__avatar {
+          display: flex;
+          padding: 12px 0;
+          //   background-color: yellow;
+          align-items: flex-end;
+          .account-info__img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          .account-info__name {
+            // margin-top: 100%;
+            font-weight: 500;
+            margin-left: 12px;
+          }
+        }
+        .account-info__row {
+          display: flex;
+
+          justify-content: space-between;
+          //   background-color: blue;
+          margin: 12px 0;
+          .account-info__row__left {
+            flex: 1;
+          }
+          .account-info__row__right {
+            flex: 3;
+            display: flex;
+            align-items: center;
+            .account-info__row__item {
+              display: flex;
+              align-items: center;
+              margin-right: 12px;
+              .account-info__row__radio {
+                margin-right: 8px;
+              }
+            }
+          }
+
+          .account-info__label {
+          }
+          .account-info__input {
+            width: 300px;
+            border: 1px solid gray;
+            padding: 2px;
+            border-radius: 4px;
+          }
+        }
+
+        .account-info__btnSubmit {
+          background-color: rgba(0, 0, 255, 0.8);
+          border: none;
+          border-radius: 18px;
+          padding: 8px 12px;
+          color: white;
+          font-weight: 500;
+          margin-top: 12px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .account-info__contact {
+        flex: 3;
+        padding: 12px;
+        .account-info__contact__row {
+          display: flex;
+          justify-content: space-between;
+          margin: 12px 0;
+          .account-info__contact__left {
+            display: flex;
+            .account-info__contact__wrapLable {
+              display: flex;
+              flex-direction: column;
+              margin-left: 12px;
+            }
+          }
+          .account-info__contact__btnUpdate {
+            height: 32px;
+            padding: 4px 12px;
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid blue;
+            color: blue;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

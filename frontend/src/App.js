@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import Products from "./components/Products";
+import Customer from "./pages/Customer";
+import Notify from "./pages/Notify";
 
 function App() {
   return (
@@ -13,20 +15,14 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          
-          <Route 
-            path="/products" 
-            element={<ProductList />} 
-          >
+          <Route path="/products" element={<ProductList />}>
             <Route path=":category" element={<ProductList />} />
           </Route>
-
           <Route path="/product/:id" element={<Product />} />
-
           <Route path="/cart" element={<Cart />} />
+          <Route path="/customer" element={<Customer />} />
         </Routes>
       </div>
     </Router>

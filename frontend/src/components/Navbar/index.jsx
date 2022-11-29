@@ -5,6 +5,7 @@ import classNames from "classnames/bind";
 import styles from "./Navbar.module.scss";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +32,31 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={cx("nav-right")}>
+          <div className={cx("nav-menu__item")}>
+            <Badge badgeContent={quantity} color="primary">
+              <AccountCircleIcon />
+            </Badge>
+            <div className={cx("nav-menu__dropdown-menu")}>
+              <ul className={cx("nav-menu__dropdown-menu__Ul")}>
+                <li className={cx("nav-menu__dropdown-menu__Ul__Li")}>
+                  Đơn hàng của tôi
+                </li>
+                <li className={cx("nav-menu__dropdown-menu__Ul__Li")}>
+                  Thông báo của tôi
+                </li>
+                <li className={cx("nav-menu__dropdown-menu__Ul__Li")}>
+                  Tài khoản của tôi
+                </li>
+                <li className={cx("nav-menu__dropdown-menu__Ul__Li")}>
+                  Đánh giá sản phẩm
+                </li>
+                <li className={cx("nav-menu__dropdown-menu__Ul__Li")}>
+                  Thoát tài khoản
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <Link to="/register">
             <div className={cx("nav-menu__item")}>REGISTER</div>
           </Link>

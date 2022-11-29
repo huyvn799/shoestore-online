@@ -68,9 +68,81 @@
         font-size: 14px;
         cursor: pointer;
         margin-left: 25px;
+        position: relative;
+
         @include mobile {
           font-size: 12px;
           margin-left: 10px;
+        }
+        &:hover .nav-menu__dropdown-menu {
+          display: flex;
+        }
+        .nav-menu__dropdown-menu {
+          position: absolute;
+          background: white;
+          z-index: 100;
+          // top: -10px;
+          top: 36px;
+          left: -80px;
+          width: 200px;
+          // display: flex;
+          display: none;
+          align-items: center;
+          border-radius: 8px;
+          border: 1px solid rgba(128, 128, 128, 0.5);
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            // right: 20px;
+            left: 40%;
+            // height: 20px;
+            // width: 20px;
+            // background: white;
+            // transform: rotate(45deg);
+
+            // border: 1px solid red;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+
+            border-bottom: 10px solid white;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            top: -16px;
+            // right: 20px;
+            // top: 100px;
+            left: 0;
+            height: 20px;
+            width: 100%;
+            background: transparent;
+            // transform: rotate(45deg);
+            // background-color: red;
+            // border: 1px solid red;
+          }
+
+          &__Ul {
+            list-style: none;
+            // display: inline-block;
+            white-space: nowrap;
+            width: 100%;
+            padding-top: 10px;
+
+            &__Li {
+              // list-style: none;
+              padding: 8px;
+              width: 100%;
+              &:hover {
+                background-color: rgba(128, 128, 128, 0.2);
+              }
+
+              // color: red;
+            }
+          }
         }
       }
     }
