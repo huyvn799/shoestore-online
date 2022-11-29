@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import styles from "./Navbar.module.scss";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { AccountCircleOutlined } from "@mui/icons-material";
 
 const cx = classNames.bind(styles);
 
@@ -67,6 +67,13 @@ const Navbar = () => {
             <div className={cx("nav-menu__item")}>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
+              </Badge>
+            </div>
+          </Link>
+          <Link to="/cart">
+            <div className={cx("nav-menu__item")}>
+              <Badge badgeContent={quantity} color="primary">
+                <AccountCircleOutlined />
               </Badge>
             </div>
           </Link>
