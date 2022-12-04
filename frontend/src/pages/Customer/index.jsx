@@ -12,47 +12,42 @@ import WishList from "../WishList";
 import Footer from "~/components/Footer";
 import History from "../History";
 import Review from "../Review";
-import EditAddress from "../EditAddress";
-
-import { useHistory, useLocation } from "react-router-dom";
-
-import { useSelector, useDispatch } from "react-redux";
-
+import { Outlet } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 const Customer = (props) => {
   // const [content, setContent] = useState(props.content);
-  const data = useSelector((state) => state.customer);
-  console.log(data.content);
-  const Content = (props) => {
-    switch (props.data) {
-      case "account":
-        return <Account />;
-      case "notify":
-        return <Notify />;
-      case "address":
-        return <Address />;
-      case "wishlist":
-        return <WishList />;
+  // const data = useSelector((state) => state.customer);
+  // console.log(data.content);
+  // const Content = (props) => {
+  //   switch (props.data) {
+  //     case "account":
+  //       return <Account />;
+  //     case "notify":
+  //       return <Notify />;
+  //     case "address":
+  //       return <Address />;
+  //     case "wishlist":
+  //       return <WishList />;
 
-      case "history":
-        return <History />;
-      case "review":
-        return <Review />;
-      case "editaddress":
-        return <EditAddress />;
-      default:
-        return "hi";
-    }
-  };
-  // console.log(data);
+  //     case "history":
+  //       return <History />;
+  //     case "review":
+  //       return <Review />;
+  //     case "editaddress":
+  //       return <EditAddress />;
+  //     default:
+  //       return "hi";
+  //   }
+  // };
+  // // console.log(data);
   return (
     <div>
-      {/* <span>{data.content}</span> */}
-      <Navbar />
+      {/* <Navbar /> */}
       <Announcement />
       <div className={cx("customer-container")}>
         <Sidebar />
+        <Outlet />
         {/* <Account /> */}
         {/* <Notify /> */}
         {/* <Address /> */}
@@ -60,11 +55,8 @@ const Customer = (props) => {
         {/* <History /> */}
         {/* <WishList /> */}
         {/* <Review /> */}
-
-        {/* {content} */}
-        {<Content data={data.content} />}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
     // <Router>

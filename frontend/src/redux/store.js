@@ -15,6 +15,9 @@ import storage from "redux-persist/lib/storage";
 import cartReducer from "./cartRedux";
 import authReducer from "./authRedux";
 import userReducer from "./userRedux";
+import productReducer from "./productRedux";
+
+import { logoutStart } from "./authRedux";
 
 import customerRedux from "./customerRedux";
 
@@ -28,8 +31,20 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   cart: cartReducer,
+  product: productReducer,
   customer: customerRedux,
 });
+
+// const rootReducer = (state, action) => {
+//     if (action.type === logoutStart.type) {
+//         // for all keys defined in your persistConfig(s)
+//         storage.removeItem('persist:root')
+//         // storage.removeItem('persist:otherKey')
+
+//         return appReducer(undefined, action);
+//     }
+//     return appReducer(state, action);
+// };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

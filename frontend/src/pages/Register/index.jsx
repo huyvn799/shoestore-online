@@ -16,9 +16,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
-
   useEffect(() => {
+    document.title = "REGISTER"
+    
     dispatch(registerStart());
   }, [])
   
@@ -44,7 +44,7 @@ const Register = () => {
     onSubmit: (newUser) => {
       // console.log(newUser);
       registerUser(newUser, dispatch, navigate, messageApi);
-  
+      
       // formik.resetForm();
     },
   });

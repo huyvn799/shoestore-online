@@ -17,6 +17,11 @@ const Login = () => {
 
   // const [user, setUser] = useState(true);
   const user = useSelector(state => state.auth.login.currentUser);
+
+  useEffect(() => {
+    document.title = "SIGN IN"
+  }, [])
+
   useEffect(() => {
     if (user) {
       setTimeout(() => {
@@ -57,7 +62,7 @@ const Login = () => {
   }, [])
 
   const { error, errMsg } = useSelector(state => state.auth.login);
-  console.log(useSelector(state => state.auth.login));
+  // console.log(useSelector(state => state.auth.login));
 
   return (
     <div className={cx("login-container")}>

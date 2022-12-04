@@ -7,43 +7,50 @@ import Announcement from "~/components/Announcement";
 import Newsletter from "~/components/Newsletter";
 import Footer from "~/components/Footer";
 import { Add, Remove } from "@material-ui/icons";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { publicRequest } from "~/requestMethod";
 import { useRef } from "react";
-import { addProduct } from "~/redux/cartRedux";
-import { useDispatch } from "react-redux";
+import { addToCart } from "~/redux/cartRedux";
+import { useDispatch, useSelector } from "react-redux";
+import { modalInfo } from "~/modalNotify";
+import { updateCart } from "~/redux/apiCalls";
 
 const cx = classNames.bind(styles);
 
 const Product = () => {
 
+  const user = useSelector(state => state.auth.login.currentUser);
+  const allProducts = useSelector(state => state.product.items);
+  const cart = useSelector(state => state.cart);
+
   const {id} = useParams();
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
+  const [productsInSeries, setProductsInSeries] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
 
   const colorParentRef = useRef();
 
-  console.log(id);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // console.log(allProducts);
 
   useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await publicRequest.get(`/products/${id}`);
-        console.log(res.data);
-        setProduct(res.data);
-        setSize(res.data.size[0]);
-        setColor(res.data.color[0]);
-        chooseColorDefault();
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    const currentProduct = allProducts.find(product => product._id === id);
+    const seriesCode = currentProduct?.seriesCode;
+    
+    document.title = currentProduct.title;
+    setProduct(currentProduct);
+    setSize(Object.keys(currentProduct.size)[0].toString());
+    setColor(currentProduct.color);
 
-    getProduct();
+    const products = allProducts.filter(product => product.seriesCode === seriesCode).sort((a, b) => b - a);
+    // console.log(products);
+
+    setProductsInSeries(products);
+
   }, [id])
 
   const handleQuantity = (type) => {
@@ -54,28 +61,37 @@ const Product = () => {
     }
   }
 
-  const chooseColorDefault = () => {
-    const firstColor = Array.from(colorParentRef.current.children)[1];
-    if (firstColor.classList[1].split("--")[1].includes("black")) {
-      firstColor.style.border = "1px solid white";
-    } else {
-      firstColor.style.border = "1px solid black";
-    }
-  }
+  // const chooseColorDefault = () => {
+  //   const allColors = Array.from(colorParentRef.current.children).slice(1);
+
+  //   const currentColor = allColors.find(p => p.color === color);
+
+  //   if (allColors && product && color){ 
+  //     console.log(allColors);
+  //     console.log(product);
+  //     console.log(color);
+  //     if (currentColor?.classList[1].split("--")[1].includes("black")) {
+  //       currentColor.style.border = "1px solid white";
+  //     } else {
+  //       currentColor.style.border = "1px solid black";
+  //     }
+  //   }
+
+  // }
 
   const handleColorChange = (e) => {
-    const allColors = Array.from(colorParentRef.current.children);
+    // const allColors = Array.from(colorParentRef.current.children);
 
-    allColors.forEach(color => {
-      color.style.border = "none";
-    });
+    // allColors.forEach(color => {
+    //   color.style.border = "none";
+    // });
 
-    // check color black
-    if (e.target.classList[1].split("--")[1].includes("black")) {
-      e.target.style.border = "1px solid white";
-    } else {
-      e.target.style.border = "1px solid black";
-    }
+    // // check color black
+    // if (e.target.classList[1].split("--")[1].includes("black")) {
+    //   e.target.style.border = "1px solid white";
+    // } else {
+    //   e.target.style.border = "1px solid black";
+    // }
 
     setColor(e.target.classList[1].split("--")[1].split("__")[0]);
   }
@@ -84,43 +100,65 @@ const Product = () => {
     setSize(e.target.value);
   }
 
-  const handleClick = () => { 
-    // update cart
-    dispatch(addProduct({ ...product, quantity, size, color}));
+  const handleAddToCart = () => { 
+    if (user) {
+      // update cart
+      const title = product.title+"-"+size;
+      const _id = product._id+"#"+size;
+      // console.log({ ...product,_id, title, quantity, size, color});
+      dispatch(addToCart({ ...product, _id, title, quantity, size, color}));
+
+      // updateCart(user.accessToken, user._id, cart)
+      // console.log(cart);
+    } else {
+      modalInfo("add to your cart", navigate)
+    }
   }
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      setTimeout(() => {
+        updateCart(user.accessToken, user._id, cart)
+      }, 1000)
+    }
+    return () => {
+      console.log("delete");
+    }
+  }, [cart, user])
 
   return (
     <div className={cx("product-container")}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Announcement />
       <div className={cx("product-wrapper")}>
         <div className={cx("product-imgContainer")}>
           <img
             className={cx("product-image")}
-            src={product.img}
+            src={product?.img}
             alt="logo"
           />
         </div>
         <div className={cx("product-infoContainer")}>
-          <h1 className={cx("product-info__title")}>{product.title}</h1>
-          <p className={cx("product-info__desc")}>{product.desc}</p>
-          <span className={cx("product-info__price")}>${product.price}</span>
+          <h1 className={cx("product-info__title")}>{product?.title}</h1>
+          <p className={cx("product-info__desc")}>{product?.desc}</p>
+          <span className={cx("product-info__price")}>${product?.price}</span>
 
           <div className={cx("product-info__filterContainer")}>
             {/* filter color */}
             <div ref={colorParentRef} className={cx("product-info__filter")}>
               <span className={cx("product-info__filter__title")}>Color</span>
               {
-                product.color?.map((c) => (
-                  <div
+                productsInSeries && productsInSeries?.map((product) => (
+                  <Link
+                    to={`/product/${product._id}`}
                     className={cx(
                       "product-info__filter__color",
-                      `product-info__filter__color--${c}`,
-                      // c === color ? "product-info__filter__color--active" : ""
+                      `product-info__filter__color--${product.color}`,
+                      product.color === color ? `product-info__filter__color--${product.color}--active` : ""
                     )}
-                    key={c}
-                    onClick={handleColorChange}
-                  ></div>
+                    key={product.color}
+                    // onClick={handleColorChange}
+                  ></Link>
                 ))
               }
             </div>
@@ -133,15 +171,16 @@ const Product = () => {
                 onChange={handleSizeChange}
               >
                 {
-                  product.size?.map((s) => (
+                  product && Object.keys(product?.size)?.map((s, index) => (
                     <option
                       className={cx("product-info__filter__option")}
                       value={s}
                       key={s}
+                      selected={index === 0}
                     >
                       {s}
                     </option>
-                  ))
+                  )) 
                 }
                 
               </select>
@@ -154,14 +193,14 @@ const Product = () => {
               <span className={cx("product-info__amount")}>{quantity}</span>
               <Add className={cx("product-info__amountBtn")} onClick={() => handleQuantity("inc")}/>
             </div>
-            <button 
-              className={cx("product-info__button")}
-              onClick={handleClick} >ADD TO CART</button>
+              <button 
+                className={cx("product-info__button")}
+                onClick={handleAddToCart} >ADD TO CART</button>
           </div>
         </div>
       </div>
-      <Newsletter />
-      <Footer />
+      {/* <Newsletter /> */}
+      {/* <Footer /> */}
     </div>
   );
 };

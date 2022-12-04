@@ -5,17 +5,23 @@ import Categories from "~/components/Categories";
 import Products from "~/components/Products";
 import Newsletter from "~/components/Newsletter";
 import Footer from "~/components/Footer";
+import { useEffect } from "react";
 const Home = () => {
+
+  useEffect(() => {
+    document.title = "SPORTY SHOE - Welcome"
+  }, [])
+
   return (
     <div className="">
       {/* Home của Tuân */}
       <Announcement />
-      <Navbar />
+      {/* <Navbar /> */}
       <Slider />
       <Categories />
       <Products />
       <Newsletter />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
