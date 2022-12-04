@@ -1,5 +1,9 @@
 import React from "react";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import EmailIcon from "@mui/icons-material/Email";
 import classNames from "classnames/bind";
+import LockIcon from "@mui/icons-material/Lock";
+import GppGoodIcon from "@mui/icons-material/GppGood";
 import styles from "./Account.module.scss";
 const cx = classNames.bind(styles);
 function Account() {
@@ -145,7 +149,7 @@ function Account() {
             <h3>Số điện thoại và Email</h3>
             <div className={cx("account-info__contact__row")}>
               <div className={cx("account-info__contact__left")}>
-                <span>icon</span>
+                <LocalPhoneIcon className={cx("account-info__icon")} />
                 <div className={cx("account-info__contact__wrapLable")}>
                   <span>Số điện thoại</span>
                   <span>Thêm số điện thoại</span>
@@ -158,7 +162,7 @@ function Account() {
 
             <div className={cx("account-info__contact__row")}>
               <div className={cx("account-info__contact__left")}>
-                <span>icon</span>
+                <EmailIcon className={cx("account-info__icon")} />
                 <div className={cx("account-info__contact__wrapLable")}>
                   <span>Địa chỉ email</span>
                   <span>tuannguyen@gmail.com</span>
@@ -173,7 +177,7 @@ function Account() {
 
             <div className={cx("account-info__contact__row")}>
               <div className={cx("account-info__contact__left")}>
-                <span>icon</span>
+                <LockIcon className={cx("account-info__icon")} />
                 <div className={cx("account-info__contact__wrapLable")}>
                   <span>Đổi mật khẩu</span>
                 </div>
@@ -185,7 +189,7 @@ function Account() {
 
             <div className={cx("account-info__contact__row")}>
               <div className={cx("account-info__contact__left")}>
-                <span>icon</span>
+                <GppGoodIcon className={cx("account-info__icon")} />
                 <div className={cx("account-info__contact__wrapLable")}>
                   <span>Thiết lập mã pin</span>
                 </div>

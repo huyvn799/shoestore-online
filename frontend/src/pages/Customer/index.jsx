@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Announcement from "~/components/Announcement";
 import Navbar from "~/components/Navbar";
 
@@ -12,11 +12,43 @@ import WishList from "../WishList";
 import Footer from "~/components/Footer";
 import History from "../History";
 import Review from "../Review";
+import EditAddress from "../EditAddress";
+
+import { useHistory, useLocation } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
+
 const cx = classNames.bind(styles);
 
-const Customer = () => {
+const Customer = (props) => {
+  // const [content, setContent] = useState(props.content);
+  const data = useSelector((state) => state.customer);
+  console.log(data.content);
+  const Content = (props) => {
+    switch (props.data) {
+      case "account":
+        return <Account />;
+      case "notify":
+        return <Notify />;
+      case "address":
+        return <Address />;
+      case "wishlist":
+        return <WishList />;
+
+      case "history":
+        return <History />;
+      case "review":
+        return <Review />;
+      case "editaddress":
+        return <EditAddress />;
+      default:
+        return "hi";
+    }
+  };
+  // console.log(data);
   return (
     <div>
+      {/* <span>{data.content}</span> */}
       <Navbar />
       <Announcement />
       <div className={cx("customer-container")}>
@@ -24,9 +56,13 @@ const Customer = () => {
         {/* <Account /> */}
         {/* <Notify /> */}
         {/* <Address /> */}
+        {/* <EditAddress /> */}
         {/* <History /> */}
         {/* <WishList /> */}
-        <Review />
+        {/* <Review /> */}
+
+        {/* {content} */}
+        {<Content data={data.content} />}
       </div>
       <Footer />
     </div>

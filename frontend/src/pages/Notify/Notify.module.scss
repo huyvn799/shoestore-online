@@ -21,14 +21,16 @@
 
         .notify-navbar__button {
           display: flex;
+          .notify-buttonNav--active {
+            border-bottom: 3px solid rgba(0, 0, 255, 0.7);
+          }
           .notify-buttonNav {
             position: relative;
             margin-right: 32px;
-            border-bottom: 3px solid rgba(0, 0, 255, 0.7);
             padding: 0 12px;
             cursor: pointer;
             .notify-iconNav {
-              font-size: 28px;
+              font-size: 24px;
               color: rgb(110, 110, 110);
             }
             .notify-redDot {
@@ -94,6 +96,8 @@
           margin-bottom: 12px;
           padding: 8px;
           border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+          align-items: center;
+          gap: 4px;
           // background-color: red;
           // justify-content: space-between;
           .notify-content__item__time {
@@ -106,6 +110,8 @@
             flex: 4;
             display: flex;
             margin-right: 16px;
+            align-items: center;
+            gap: 4px;
             .notify-content__item__desc__icon {
               margin-right: 12px;
             }

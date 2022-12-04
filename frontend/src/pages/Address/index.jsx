@@ -47,7 +47,7 @@ const Address = () => {
   return (
     <div className={cx("address-container")}>
       <div className={cx("address-wrap")}>
-        <h3>Sổ địa chỉ</h3>
+        <h2>Sổ địa chỉ</h2>
         <div className={cx("address-add")}>
           <a className={cx("address-add__button")} href="#">
             <AddIcon className={cx("address-add__button__icon")} />

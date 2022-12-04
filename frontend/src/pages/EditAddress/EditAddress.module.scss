@@ -1,0 +1,45 @@
+.editAddress-container {
+  flex: 4;
+  .editAddress-wrap {
+    margin-top: 24px;
+
+    .editAddress-content {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid gray;
+      border-radius: 12px;
+      margin-right: 600px;
+      .editAddress-row {
+        display: flex;
+        // justify-content: space-between;
+        // background-color: red;
+        // padding-right: 500px;
+        gap: 60px;
+        margin-bottom: 18px;
+        .editAddress-label {
+          width: 120px;
+          font-weight: 500;
+        }
+        .editAddress-input {
+          width: 360px;
+          border: 1px rgb(164, 164, 164) solid;
+          border-radius: 4px;
+        }
+        .editAddress-checkbox {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+      }
+      .editAddress-submit {
+        margin-top: 12px;
+        padding: 8px 24px;
+        border-radius: 24px;
+        background-color: rgb(0 128 128);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

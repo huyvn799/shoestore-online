@@ -1,4 +1,6 @@
 import React from "react";
+import StarIcon from "@mui/icons-material/Star";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import classNames from "classnames/bind";
 import styles from "./Review.module.scss";
 const cx = classNames.bind(styles);
@@ -31,7 +33,76 @@ const ItemWaiting = () => {
 };
 
 const ItemDone = () => {
-  return <div>Done</div>;
+  return (
+    <div className={cx("review-itemDone")}>
+      <h4>Đã mua ngày: 22/12/2022</h4>
+      <div className={cx("review-itemDone__content")}>
+        <div className={cx("review-itemDone__left")}>
+          <img
+            className={cx("review-itemDone__img")}
+            src="https://hoang-phuc.com/thoi-trang/wp-content/uploads/2021/12/giay-sneaker-nam-de-cao-ca-tinh.jpg"
+            alt=""
+          />
+          <div className={cx("review-itemDone__desc")}>
+            <h3>Giày thể thao cao cấp</h3>
+            <h4>Màu: đen</h4>
+            <h4>Size: 42</h4>
+          </div>
+        </div>
+        <div className={cx("review-itemDone__right")}>
+          <h4>Nhận xét đánh giá sản phẩm :</h4>
+          <div className={cx("review-itemDone__vote")}>
+            <StarIcon
+              // style={{ color: "gray", fontSize: 16 }}
+              className={cx("review-itemDone__star")}
+            />
+            <StarIcon className={cx("review-itemDone__star")} />
+            <StarIcon className={cx("review-itemDone__star")} />
+            <StarIcon className={cx("review-itemDone__star")} />
+            <StarIcon className={cx("review-itemDone__star")} />
+          </div>
+          <div className={cx("review-itemDone__cmtContainer")}>
+            <div className={cx("review-itemDone__cmtWrap")}>
+              <textarea
+                className={cx("review-itemDone__cmt")}
+                id="txtCmtCustomer"
+                name="txtCmtCustomer"
+                rows="3"
+                cols="50"
+                readOnly
+              >
+                Sản phẩm rất tốt
+              </textarea>
+              {/* <ThumbUpAltIcon
+              className={cx("review-itemDone__like__customer")}
+              /> */}
+              <div className={cx("review-itemDone__like")}>
+                <ThumbUpAltIcon />
+                <span>1</span>
+              </div>
+            </div>
+            <h4>Phản hồi từ nhà bán hàng:</h4>
+            <div className={cx("review-itemDone__cmtWrap")}>
+              <textarea
+                className={cx("review-itemDone__cmt")}
+                id="txtCmtAdmin"
+                name="txtCmtAdmin"
+                rows="3"
+                cols="50"
+                readOnly
+              >
+                Cảm ơn quý khách đã ủng hộ shop chúng tôi
+              </textarea>
+              <div className={cx("review-itemDone__like")}>
+                <ThumbUpAltIcon />
+                <span>2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const Review = () => {
@@ -50,9 +121,11 @@ const Review = () => {
           </div>
 
           <div className={cx("review-list")}>
+            {/* <ItemWaiting />
             <ItemWaiting />
-            <ItemWaiting />
-            <ItemWaiting />
+            <ItemWaiting /> */}
+
+            <ItemDone />
           </div>
         </div>
       </div>

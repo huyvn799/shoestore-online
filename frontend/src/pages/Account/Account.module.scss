@@ -85,9 +85,15 @@
         .account-info__contact__row {
           display: flex;
           justify-content: space-between;
-          margin: 12px 0;
+          margin: 20px 0;
+          align-items: center;
           .account-info__contact__left {
             display: flex;
+            align-items: center;
+            .account-info__icon {
+              color: gray;
+              font-size: 20px;
+            }
             .account-info__contact__wrapLable {
               display: flex;
               flex-direction: column;

@@ -74,6 +74,86 @@
             }
           }
         }
+
+        .review-itemDone {
+          margin-bottom: 24px;
+          border-radius: 4px;
+          padding: 12px;
+          -webkit-box-shadow: 4px 0px 6px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 4px 0px 6px 2px rgba(0, 0, 0, 0.1);
+          .review-itemDone__content {
+            display: flex;
+            .review-itemDone__left {
+              flex: 1;
+              display: flex;
+              gap: 12px;
+              .review-itemDone__img {
+                height: 250px;
+                width: 250px;
+                object-fit: fill;
+                border-radius: 12px;
+              }
+              .review-itemDone__desc {
+                display: flex;
+                flex-direction: column;
+              }
+            }
+            .review-itemDone__right {
+              flex: 1;
+              display: flex;
+              gap: 8px;
+              flex-direction: column;
+              border-left: 1px solid rgba(128, 128, 128, 0.3);
+              padding-left: 32px;
+
+              .review-itemDone__vote {
+                display: flex;
+                gap: 4px;
+                .review-itemDone__star {
+                  color: rgb(244, 244, 50);
+                  font-size: 24px;
+                }
+              }
+              .review-itemDone__cmtContainer {
+                margin-top: 4;
+                .review-itemDone__cmtWrap {
+                  position: relative;
+                  // background-color: green;
+                  .review-itemDone__cmt {
+                    border-radius: 12px;
+                    padding: 8px;
+                  }
+                  .review-itemDone__like {
+                    position: absolute;
+                    // background-color: red;
+                    padding: 12px;
+                    bottom: -4px;
+                    left: -4px;
+                    color: gray;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                  }
+                }
+              }
+
+              .review-itemDone__right__label {
+                font-weight: 500;
+                font-size: 16px;
+                color: blue;
+              }
+              .review-itemDone__button {
+                width: 150px;
+                height: 30px;
+                border-radius: 4px;
+                border: 1px solid blue;
+                background-color: white;
+                cursor: pointer;
+                color: blue;
+              }
+            }
+          }
+        }
       }
     }
   }
