@@ -7,8 +7,9 @@ import Announcement from "~/components/Announcement";
 import Products from "~/components/Products";
 import Newsletter from "~/components/Newsletter";
 import Footer from "~/components/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Select, Tag, Input, Row, Col, Typography, Radio } from "antd";
+import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -17,9 +18,8 @@ const {Option} = Select;
 
 const ProductList = () => {
 
+  const location = useLocation();
   const {category} = useParams();
-
-  console.log(category);
 
   const [filters, setFilters] = useState({
     brand: [],
@@ -28,6 +28,19 @@ const ProductList = () => {
     color: []
   });
   const [sort, setSort] = useState("newest");
+
+  useEffect(() => {
+    if (location.pathname.includes("women")) {
+      document.title = "SHOES FOR WOMEN";
+    } else if (location.pathname.includes("men")) {
+      document.title = "SHOES FOR MEN";
+    } else if (location.pathname.includes("unisex")) {
+      document.title = "SHOES FOR UNISEX";
+    } else {
+      document.title = "SHOES FOR SEARCH";
+    }
+
+  }, [location])
 
   // const handleFilters = (e) => {
   //   const value = e.target.value;
@@ -75,7 +88,7 @@ const ProductList = () => {
 
   return (
     <div className={cx("productList-container")}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Announcement />
       <h1 className={cx("productList-title")}>{category ? `Shoes for ${category}` : "All shoes"}</h1>
       {/* filter origin */}
@@ -356,8 +369,8 @@ const ProductList = () => {
 
       {/* list product */}
       <Products category={category} filters={filters} sort={sort}/>
-      <Newsletter />
-      <Footer />
+      {/* <Newsletter /> */}
+      {/* <Footer /> */}
     </div>
   );
 };

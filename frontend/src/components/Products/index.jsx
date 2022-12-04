@@ -6,6 +6,7 @@ import Product from "./Product";
 import { memo, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import EmptyData from "../EmptyData";
 
 const cx = classNames.bind(styles);
 
@@ -36,18 +37,19 @@ const Products = ({ category, filters, sort }) => {
 
   useEffect(() => {
       setFilteredProducts(
-        products.filter((attr) =>
+        products?.filter((attr) =>
           Object.entries(filters).every(([key, values]) => {
-            console.log("[keys]", attr[key]);
-            console.log("[values]", values);
-            console.log("[array]", Array.isArray(attr[key]));
+            // console.log("[keys]", attr[key]);
+            // console.log("[values]", values);
+            // console.log("[array]", Array.isArray(attr[key]));
             if (values.length === 0) {
               return true;
             } else {
-              if (Array.isArray(attr[key])) {
-                return values.every(item => attr[key].includes(item));
+              if (typeof attr[key] === "object" && !Array.isArray(attr[key]) && attr[key] !== null) {
+                
+                return values.some(item => Object.keys(attr[key]).includes(item));
               } else {
-                return values.includes(attr[key]);
+                return values.includes(attr[key].toLowerCase());
               }
             } 
           }
@@ -76,19 +78,26 @@ const Products = ({ category, filters, sort }) => {
       {
         location.pathname.includes("products") ? 
         (
-          filteredProducts?.map((item, index) => (
-            <div key={index}>
-              <Product item={item} />
-            </div>
-          ))
+          filteredProducts?.length === 0 ? (
+            <EmptyData desc="No suitable shoes"/>
+          ) : (
+            filteredProducts?.map((item, index) => (
+              
+                <Product item={item} key={item.id} />
+  
+            ))
+          )
         )
         : 
         (
-          products?.slice(0, 8).map((item, index) => (
-          <div key={index}>
-            <Product item={item} />
-          </div>
-        ))
+          products?.length === 0 ? (
+            <EmptyData/>
+          ) : (
+            products?.slice(0, 8).map((item, index) => (
+  
+              <Product item={item} key={`${item.id}${index}`}/>
+            ))
+          )
         )
       }
     </div>

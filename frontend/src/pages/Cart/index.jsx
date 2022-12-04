@@ -6,44 +6,89 @@ import styles from "./Cart.module.scss";
 import CartProduct from "./CartProduct";
 import Footer from "~/components/Footer";
 import CartSummary from "./CartSummary";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import EmptyData from "~/components/EmptyData";
+import { resetCart } from "~/redux/cartRedux";
+import { updateCart } from "~/redux/apiCalls";
 
 const cx = classNames.bind(styles);
 
 const Cart = () => {
+
+  const user = useSelector(state=> state.auth.login.currentUser);
   const cart = useSelector(state => state.cart);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "My cart"
+  }, [])
+
+  useEffect(() => {
+    if (!user) {
+      console.log(user);
+      navigate("/");
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      setTimeout(() => {
+        updateCart(user.accessToken, user._id, cart);
+      }, 1000)
+    }
+    return () => {
+      console.log("delete");
+    }
+  }, [cart, user])
+
+  const handleClearCart = () => {
+    dispatch(resetCart());
+    // updateCart(user.accessToken, user._id, cart);
+  }
+
   return (
     <div className={cx("cart-container")}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Announcement />
       <div className={cx("cart-wrapper")}>
         <h1 className={cx("cart-title")}>YOUR SHOES</h1>
         <div className={cx("cart-top")}>
-          <button className={cx("cart-top__button")}>CONTINUE SHOPPING</button>
-          <div className={cx("cart-top__texts")}>
+          <Link to="/" className={cx("cart-top__button", "cart-top__button-continue")}>Continue shopping</Link>
+          {/* <div className={cx("cart-top__texts")}>
             <span className={cx("cart-top__texts__text")}>
               Shopping shoes ({cart.quantity})
             </span>
             <span className={cx("cart-top__texts__text")}>
               Your Wishlist (0)
             </span>
-          </div>
+          </div> */}
           <button
-            className={cx("cart-top__button", "cart-top__button--filled")}
+            className={cx("cart-top__button",  "cart-top__button-clear")}
+            onClick={() => handleClearCart()}
           >
-            CHECKOUT NOW
+            Clear cart
           </button>
         </div>
 
         <div className={cx("cart-bottom")}>
           <div className={cx("cart-info")}>
             {
-              cart.products.map((product) => (
-                <div key={product.id}>
-                  <CartProduct cartProduct={product}/>
-                  <hr className={cx("cart-line")} />
+              cart.cartItems?.length === 0 ? (
+                <div style={{ display: "flex", margin: "auto" }}>
+                  <EmptyData desc="No products in your cart" />
                 </div>
-              ))
+              ) : (
+                cart.cartItems.map((product) => (
+                  <div key={product.id}>
+                    <CartProduct cartProduct={product} user={user} cart={cart}/>
+                  </div>
+                ))
+              )
             }
           </div>
           <div className={cx("cart-summary__container")}>
@@ -51,7 +96,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

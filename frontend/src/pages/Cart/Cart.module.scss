@@ -25,6 +25,24 @@
           background-color: black;
           color: white;
         }
+
+        &-continue {
+          border: 1px solid black;
+          color: black;
+          &:hover {
+            color: gray;
+            border-color: gray;
+          }
+        }
+
+        &-clear {
+          border: 1px solid red;
+          color: red;
+          &:hover {
+            color: white;
+            background-color: red;
+          }
+        }
       }
       .cart-top__texts {
         @include mobile {
@@ -45,6 +63,9 @@
       }
       .cart-info {
         flex: 3;
+        // display: flex;
+        // margin: auto;
+        gap: 10px
       }
       .cart-line {
         background-color: #eee;
@@ -56,7 +77,7 @@
         border: 0.5px solid lightgray;
         border-radius: 10px;
         padding: 20px;
-        height: 50vh;
+        max-height: 280px;
       }
     }
   }

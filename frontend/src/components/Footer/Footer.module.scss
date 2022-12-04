@@ -1,5 +1,10 @@
 @import "../../Variable/_responsive.module";
 
+.footer-fix {
+  position: relative;
+  bottom: 0;
+}
+
 .footer-container {
   display: flex;
   @include mobile {

@@ -1,31 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import ProductList from "./pages/ProductList";
-import Product from "./pages/Product";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Cart from "./pages/Cart";
-import Products from "./components/Products";
-import Customer from "./pages/Customer";
-import Notify from "./pages/Notify";
+import { Outlet } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { cartFetch } from "./redux/cartRedux";
 
 function App() {
+  const user = useSelector(state=>state.auth.login.currentUser);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (user) {
+      dispatch(cartFetch(user));
+    }
+  }, [user])
+
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/products" element={<ProductList />}>
-            <Route path=":category" element={<ProductList />} />
-          </Route>
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/customer" element={<Customer />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <ToastContainer/>
+      <Navbar/>
+      <Outlet/>
+      <Footer/>
+    </div>
   );
 }
 

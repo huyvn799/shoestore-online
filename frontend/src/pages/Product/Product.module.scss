@@ -54,42 +54,70 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            box-shadow: 0 0 3px #000;
+            box-shadow: 0 0 5px #000;
             margin: 0px 5px;
             cursor: pointer;
             &--black {
               background-color: black;
+              &--active {
+                border: 1.2px solid white;
+              }
             }
             &--blue {
               background-color: blue;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--red {
               background-color: red;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--orange {
               background-color: orange;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--yellow {
               background-color: yellow;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--white {
               background-color: white;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--purple {
               background-color: purple;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--pink {
               background-color: pink;
+              &--active {
+                border: 1px solid black;
+              }
             }
             &--green {
               background-color: green;
+              &--active {
+                border: 1px solid white;
+              }
             }
             &--gray {
               background-color: gray;
+              &--active {
+                border: 1px solid white;
+              }
             }
-            &--active {
-              border: 1px solid teal;
-            }
+            
           }
           .product-info__filter__size {
             margin-left: 10px;

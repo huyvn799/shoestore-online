@@ -12,23 +12,25 @@ import WishList from "../WishList";
 import Footer from "~/components/Footer";
 import History from "../History";
 import Review from "../Review";
+import { Outlet } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 const Customer = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Announcement />
       <div className={cx("customer-container")}>
         <Sidebar />
+        <Outlet/>
         {/* <Account /> */}
         {/* <Notify /> */}
         {/* <Address /> */}
         {/* <History /> */}
         {/* <WishList /> */}
-        <Review />
+        {/* <Review /> */}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
     // <Router>

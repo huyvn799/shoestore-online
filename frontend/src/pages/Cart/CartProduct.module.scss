@@ -3,6 +3,8 @@
 .cart-product {
   display: flex;
   justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(221, 220, 220);
   @include mobile {
     flex-direction: column;
   }
@@ -63,10 +65,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     .cart-product__amountContainer {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
 
       .cart-product__productAmount,
       .cart-product__amountBtn {
@@ -102,6 +104,15 @@
       font-weight: 200;
       @include mobile {
         margin-bottom: 20px;
+      }
+    }
+
+    .cart-product__remove {
+      color: red;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba(255, 0, 0, 0.7);
       }
     }
   }

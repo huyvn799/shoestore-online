@@ -79,6 +79,23 @@ const productController = {
             res.status(500).json(err);
         }
     },
+
+    // GET ALL PRODUCTS IN SERIES
+    getSeriesProducts: async (req, res) => {
+        const product = await productController.getProduct();
+
+        try {
+            const qSeriesCode = product.seriesCode; //api/products?seriesCode=ABCXYZ
+
+            const products = await Product.find({ seriesCode: { 
+                $in: [qSeriesCode],
+            }})
+
+            res.status(200).json(products);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
 }
 
 module.exports = productController;

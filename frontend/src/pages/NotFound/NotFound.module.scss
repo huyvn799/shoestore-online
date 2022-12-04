@@ -1,0 +1,73 @@
+@import "../../Variable/_responsive.module";
+.register-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("https://images.pexels.com/photos/2526878/pexels-photo-2526878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .register-wrapper {
+    @include mobile {
+      width: 100%;
+    }
+    width: 500px;
+    padding: 20px;
+    background-color: white;
+    .register-title {
+      font-size: 24px;
+      font-weight: 300;
+    }
+    .register-form {
+      display: flex;
+      flex-wrap: wrap;
+      .register-input {
+        width: 100%;
+        //flex: 1;
+        //min-width: 40%;
+        border: none;
+        outline: none;
+        border: 1px solid #000;
+        border-radius: 3px;
+        margin-top: 20px;
+        padding: 10px;
+
+        &:focus {
+          outline: 1px solid teal;
+          border-color: teal;
+        }
+      }
+      .register-agreement {
+        font-size: 12px;
+        margin: 20px 0px;
+      }
+
+      .register-footer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+      }
+
+      .register-button {
+        width: 40%;
+        border: none;
+        padding: 15px 20px;
+        background-color: teal;
+        color: white;
+        cursor: pointer;
+      }
+      .register-link {
+        margin: 5px 0px;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -18,8 +18,10 @@ const cartController = {
     // UPDATE CART
     updateCart: async (req, res) => {
         try {
-            const updatedCart = await Cart.findByIdAndUpdate(
-                req.params.id,
+            const updatedCart = await Cart.findOneAndUpdate(
+                { 
+                    userId: req.params.id,
+                },
                 {
                     // cập nhật thông tin mới từ req.body
                     $set: req.body,
@@ -47,9 +49,12 @@ const cartController = {
     getUserCart: async (req, res) => {
         try {
             // mỗi user chỉ có 1 cart
-            const cart = await Cart.find({ userId: req.params.userId});
+            // const cart = await Cart.find({ userId: req.params.id});
+            // console.log();
+            const cart = await Cart.findOne({ userId: req.params.id})
 
-            res.status(200).json(cart._doc);
+            res.status(200).json(cart);
+            // res.status(200).json(cart._doc);
             // res.status(200).json(`Get cart with ${req.params.id} successfully!`);
         } catch (err) {
             res.status(500).json(err);
