@@ -1,15 +1,39 @@
  
+import axios from "axios";
 import classNames from "classnames/bind";
 import PayButton from "~/components/PayButton";
 import styles from "./CartSummary.module.scss";
+import { publicRequest } from "~/requestMethod";
+import { useSelector } from "react-redux";
+
 const cx = classNames.bind(styles);
 const CartSummary = ({cart}) => {
+
+  const user = useSelector(state => state.auth.login.currentUser);
 
   const shippingCost = 0;
   const shippingDiscount = 0;
 
   const handleCheckout = () => {
+    const doCheckout = async () => {
+        try {
+          const res = await publicRequest.post("/stripe/checkout", {
+              cartItems: cart.cartItems,
+              userId: user._id
+            }, {
+              headers: {
+                token: `Bearer ${user.accessToken}`
+              }
+            })
+          
+            window.location.href = res.data.url;
+          
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
+    doCheckout();
   }
 
   return ( 
@@ -31,7 +55,9 @@ const CartSummary = ({cart}) => {
         <span>Subtotal</span>
         <span>${cart.cartTotal + shippingCost - shippingDiscount}</span>
       </div>
-      <button className={cx("cart-summary__button")}>CHECKOUT NOW</button>
+      <button className={cx("cart-summary__button")}
+        onClick={handleCheckout}
+      >CHECKOUT NOW</button>
       {/* <PayButton/> */}
     </div>
   );

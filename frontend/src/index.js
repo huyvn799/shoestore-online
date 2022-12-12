@@ -22,6 +22,8 @@ import Account from "./pages/Account";
 import Address from "./pages/Address";
 import WishList from "./pages/WishList";
 import { productsFetch } from "./redux/productRedux";
+import CheckoutSuccess from "./components/CheckoutSuccess";
+import History from "./pages/History";
 
 store.dispatch(productsFetch());
 
@@ -42,11 +44,14 @@ root.render(
               <Route path="/cart" element={<Cart />} />
               <Route path="/customer" element={<Customer />} >
                 <Route path="profile" element={<Account />}/>
+                <Route path="notification" element={<Notify />}/>
                 <Route path="address" element={<Address />}/>
                 <Route path="wishlist" element={<WishList />}/>
                 <Route path="review" element={<Review />}/>
+                <Route path="order" element={<History />}/>
               </Route>
 
+              <Route path="/checkout-success" element={<CheckoutSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/login" element={<Login />} />

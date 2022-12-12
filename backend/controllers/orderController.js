@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 
 const orderController = {
     // ADD ORDER
@@ -6,6 +7,30 @@ const orderController = {
 
         const newOrder = new Order(req.body);
 
+        const updateStock = async(product) => {
+            console.log(product);
+
+            try {
+                // id có dạng [product]#[size]
+                const currentProduct = await Product.findById(product._id.split('#')[0]);
+
+                const updatedProduct = await Product.findByIdAndUpdate(
+                    currentProduct._id,
+                    {
+                        [product.size]: currentProduct[product.size] - 1,                        
+                    },
+                    { new: true } // trả về object đã updated mới
+                );
+                    
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        newOrder.products.forEach((product) => {
+            updateStock(product);
+        });
+                
         try {
             const savedOrder = await newOrder.save();
             res.status(200).json(savedOrder);
@@ -47,7 +72,7 @@ const orderController = {
     getUserOrders: async (req, res) => {
         try {
             // mỗi user chỉ có 1 orders
-            const orders = await Order.find({ userId: req.params.userId});
+            const orders = await Order.find({ userId: req.params.id});
 
             res.status(200).json(orders);
             // res.status(200).json(`Get orders with ${req.params.userId} successfully!`);

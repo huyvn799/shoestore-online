@@ -2,6 +2,7 @@ import { messageCall } from "~/messageApi";
 import { publicRequest } from "~/requestMethod";
 import { loginFailure, loginStart, loginSuccess, logoutFailure, logoutStart, logoutSuccess, registerFailure, registerStart, registerSuccess } from "./authRedux";
 import { resetCart } from "./cartRedux";
+import { getOrdersFailure, getOrdersStart, getOrdersSuccess } from "./orderRedux";
 import { getProductsFailure, getProductsStart, getProductsSuccess } from "./productRedux";
 
 export const login = async (dispatch, user, navigate, messageApi) => {
@@ -73,9 +74,9 @@ export const registerUser = async(user, dispatch, navigate, messageApi) => {
 export const updateCart = async(accessToken, userId, cart) => {
     try { 
         const res = await publicRequest.put(`/carts/${userId}`, {
-            products: cart.cartItems,
-            quantity: cart.cartQuantity,
-            total: cart.cartTotal
+            products: cart?.cartItems,
+            quantity: cart?.cartQuantity,
+            total: cart?.cartTotal
         }, { 
             headers: { 
                 token: `Bearer ${accessToken}`
@@ -90,15 +91,20 @@ export const updateCart = async(accessToken, userId, cart) => {
 
 }
 
-// export const getAllProducts = async (dispatch) => {
-//     dispatch(getProductsStart());
+export const getLatestOrder = async (accessToken, userId, dispatch) => {
+    dispatch(getOrdersStart());
+    
+    try {
+        const res = await publicRequest.get(`/orders/${userId}`, {
+            headers: {
+                token: `Bearer ${accessToken}`
+            }});
 
-//     try {
-//         const res = await publicRequest.get("/products");
-//         dispatch(getProductsSuccess(res.data));
+        console.log(res);
+        dispatch(getOrdersSuccess(res.data));
 
-//     } catch (err) {
-//         dispatch(getProductsFailure());
-//     }
-// }
+    } catch (err) {
+        dispatch(getOrdersFailure());
+    }
+}
 

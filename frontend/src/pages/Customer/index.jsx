@@ -22,7 +22,12 @@ const Customer = () => {
       <Announcement />
       <div className={cx("customer-container")}>
         <Sidebar />
-        <Outlet/>
+        <div style={{ 
+          flex: 1,
+          padding: "20px"
+         }}>
+          <Outlet/>
+        </div>
         {/* <Account /> */}
         {/* <Notify /> */}
         {/* <Address /> */}

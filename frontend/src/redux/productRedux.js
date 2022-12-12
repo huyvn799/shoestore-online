@@ -31,6 +31,20 @@ const productsSlice = createSlice({
             state.isFetching = false;
             state.error = true;
         },
+        // DECREASE ALL 
+        decreaseProductsStart: (state) => {
+            state.isFetching = true;
+            state.error = false;
+        },
+        decreaseProductsSuccess: (state, action) => {
+            state.items = action.payload;
+            state.isFetching = false;
+            state.error = false;
+        },
+        decreaseProductsFailure: (state) => {
+            state.isFetching = false;
+            state.error = true;
+        },
     },
     extraReducers: { 
         [productsFetch.pending]: (state, action) => {

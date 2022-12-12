@@ -16,7 +16,7 @@ router.put("/:id", middlewareController.verifyTokenOnlyAdmin, orderController.up
 router.delete("/:id", middlewareController.verifyTokenOnlyAdmin, orderController.deleteOrder);
 
 // GET ORDER INFO
-router.get("/:userId", middlewareController.verifyTokenAndAdminAuth, orderController.getUserOrders);
+router.get("/:id", middlewareController.verifyTokenAndAdminAuth, orderController.getUserOrders);
 
 // GET ALL ORDERS
 router.get("/", middlewareController.verifyTokenOnlyAdmin, orderController.getAllOrders);

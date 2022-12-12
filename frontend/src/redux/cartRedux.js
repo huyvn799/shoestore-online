@@ -11,9 +11,7 @@ export const cartFetch = createAsyncThunk(
                 token: `Bearer ${user.accessToken}`
             }
         });
-
-        console.log(res);
-
+        // console.log(res.data);
         return res?.data;
     }
 )
@@ -39,7 +37,9 @@ const cartSlice = createSlice({
                     && product.color === action.payload.color
                     && product.size === action.payload.size) {
                         return true;
-                    } 
+                    } else {
+                        return false;
+                    }
             })
 
             if (productIndex !== -1) {

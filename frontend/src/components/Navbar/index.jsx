@@ -23,7 +23,7 @@ import {modalInfo} from "~/modalNotify";
 const cx = classNames.bind(styles);
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.cartQuantity);
+  const quantity = useSelector((state) => state.cart?.cartQuantity);
 
   const user = useSelector((state) => state.auth.login.currentUser);
   // const user = true;
@@ -53,7 +53,7 @@ const Navbar = () => {
 
   const items = [
     {
-      label: <Link to="/customer/profile">My Account</Link>,
+      label: <Link to="/customer/profile">My Profile</Link>,
       key: "1",
       icon: <UserOutlined />,
     },

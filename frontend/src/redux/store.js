@@ -16,6 +16,7 @@ import cartReducer from "./cartRedux";
 import authReducer from "./authRedux";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
+import orderReducer from "./orderRedux";
 
 import {logoutStart} from "./authRedux";
 
@@ -29,8 +30,9 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
+    product: productReducer,
     cart: cartReducer,
-    product: productReducer
+    order: orderReducer
 })
 
 // const rootReducer = (state, action) => {

@@ -56,7 +56,7 @@ const authController = {
                     isAdmin: user.isAdmin,
                 }, process.env.JWT_SECRET, 
                 {
-                    expiresIn: "1d"    
+                    expiresIn: "30d"    
                 }
             );
     

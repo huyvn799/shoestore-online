@@ -27,6 +27,7 @@ const Product = () => {
   const [product, setProduct] = useState(null);
   const [productsInSeries, setProductsInSeries] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [maxQuantity, setMaxQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
 
@@ -45,6 +46,8 @@ const Product = () => {
     setProduct(currentProduct);
     setSize(Object.keys(currentProduct.size)[0].toString());
     setColor(currentProduct.color);
+    setQuantity(1);
+    
 
     const products = allProducts.filter(product => product.seriesCode === seriesCode).sort((a, b) => b - a);
     // console.log(products);
@@ -53,11 +56,15 @@ const Product = () => {
 
   }, [id])
 
+  useEffect(() => {
+    setMaxQuantity(product?.size[size]);
+  }, [product, size, color])
+
   const handleQuantity = (type) => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      quantity < maxQuantity && setQuantity(quantity + 1);
     }
   }
 
@@ -98,7 +105,11 @@ const Product = () => {
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
+    setQuantity(1);
+    setMaxQuantity(product.size[size]);
   }
+  console.log(size);
+  console.log(maxQuantity);
 
   const handleAddToCart = () => { 
     if (user) {
@@ -116,7 +127,6 @@ const Product = () => {
   }
   useEffect(() => {
     if (user) {
-      console.log(user);
       setTimeout(() => {
         updateCart(user.accessToken, user._id, cart)
       }, 1000)
@@ -171,32 +181,38 @@ const Product = () => {
                 onChange={handleSizeChange}
               >
                 {
-                  product && Object.keys(product?.size)?.map((s, index) => (
-                    <option
-                      className={cx("product-info__filter__option")}
-                      value={s}
-                      key={s}
-                      selected={index === 0}
-                    >
-                      {s}
-                    </option>
-                  )) 
+                  product && Object.entries(product?.size)?.map(([s, inStock], index) => {
+                    return (
+                      <option
+                        className={cx("product-info__filter__option")}
+                        value={s}
+                        key={s}
+                        selected={index === 0}
+                      >
+                        {s}
+                      </option>
+                    )
+                  }) 
                 }
                 
               </select>
             </div>
           </div>
 
-          <div className={cx("product-info__addContainer")}>
-            <div className={cx("product-info__amountContainer")}>
-              <Remove className={cx("product-info__amountBtn")} onClick={() => handleQuantity("dec")}/>
-              <span className={cx("product-info__amount")}>{quantity}</span>
-              <Add className={cx("product-info__amountBtn")} onClick={() => handleQuantity("inc")}/>
+          {maxQuantity === 0 ? (
+            <div>OUT OF STOCK</div>
+          ): (
+            <div className={cx("product-info__addContainer")}>
+              <div className={cx("product-info__amountContainer")}>
+                <Remove className={cx("product-info__amountBtn")} onClick={() => handleQuantity("dec")}/>
+                <span className={cx("product-info__amount")}>{quantity}</span>
+                <Add className={cx("product-info__amountBtn")} onClick={() => handleQuantity("inc")}/>
+              </div>
+                <button 
+                  className={cx("product-info__button")}
+                  onClick={handleAddToCart} >ADD TO CART</button>
             </div>
-              <button 
-                className={cx("product-info__button")}
-                onClick={handleAddToCart} >ADD TO CART</button>
-          </div>
+          )}
         </div>
       </div>
       {/* <Newsletter /> */}

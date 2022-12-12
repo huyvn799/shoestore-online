@@ -6,7 +6,7 @@ import Product from "./Product";
 import { memo, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import EmptyData from "../EmptyData";
+import EmptyData from "~/components/EmptyData";
 
 const cx = classNames.bind(styles);
 
@@ -82,9 +82,7 @@ const Products = ({ category, filters, sort }) => {
             <EmptyData desc="No suitable shoes"/>
           ) : (
             filteredProducts?.map((item, index) => (
-              
-                <Product item={item} key={item.id} />
-  
+              <Product item={item} key={item.id} />
             ))
           )
         )

@@ -29,22 +29,22 @@ const Cart = () => {
 
   useEffect(() => {
     if (!user) {
-      console.log(user);
+      // console.log(user);
       navigate("/");
     }
   }, [user])
 
   useEffect(() => {
     if (user) {
-      console.log(user);
-      setTimeout(() => {
-        updateCart(user.accessToken, user._id, cart);
-      }, 1000)
+      // console.log(user);
+      updateCart(user.accessToken, user._id, cart);
+      // setTimeout(() => {
+      // }, 1000)
     }
-    return () => {
-      console.log("delete");
-    }
-  }, [cart, user])
+    // return () => {
+    //   console.log("delete");
+    // }
+  }, [cart])
 
   const handleClearCart = () => {
     dispatch(resetCart());
