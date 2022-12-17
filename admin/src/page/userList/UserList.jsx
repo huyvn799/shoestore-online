@@ -1,24 +1,25 @@
 import "./userList.css";
+import "../productList/productList.css";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState, useEffect} from "react";
-import { deleteProduct, getAllProducts, getAllOrders } from "../../redux/apiCalls";
+import { deleteProduct, getAllProducts, getAllOrders, getAllUsers, deleteUser } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { Tag } from "antd";
 import { toast } from "react-toastify";
 
 export default function UserList() {
-  const products = useSelector(state => state.product.items);
   const orders = useSelector(state => state.order.items);
-  const [data, setData] = useState(products);
+  const users = useSelector(state => state.user.items);
+  const [data, setData] = useState(users);
   // const [data, setData] = useState(productRows);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getAllProducts(dispatch);
     getAllOrders(dispatch);
+    getAllUsers(dispatch);
   }, [dispatch])
 
   const handleDelete = (id) => {
@@ -26,123 +27,65 @@ export default function UserList() {
     // kiểm tra sản phẩm có trong order ko?
     const checkOrder = orders.find(order => {
         // console.log(order._id);   
-        const a = order.products.find(product => {
-          // console.log(product._id.split("#")[0], " ", id);
-          return product._id.split("#")[0] === id
-        })
-        return a;
+        return order.userId === id;
       }
     )
 
     if (checkOrder) {
-      toast.error(`Not allowed to delete. This product is in an order.`, {
+      toast.error(`Not allowed to delete. This user is in an order.`, {
           position: "bottom-right"
       })
     } else {
-      deleteProduct(dispatch, id);
+      deleteUser(dispatch, id);
     }
-
-    // setData(data.filter((item) => item.id !== id));
-
-
-    // deleteProduct(dispatch, id);
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const data = products.map((item) => ({
-      ...item,
-      categories: item.categories.join(","),
-      size: Object.entries(item.size).map(([size, stock])=> {
-        return `${size} (${stock})`
-      }).join(","),
-    }))
+  //   const data = products.map((item) => ({
+  //     ...item,
+  //     categories: item.categories.join(","),
+  //     size: Object.entries(item.size).map(([size, stock])=> {
+  //       return `${size} (${stock})`
+  //     }).join(","),
+  //   }))
 
-    // console.log(data);
-    setData(data)
-  }, [products])
-
-  console.log(products);
+  //   // console.log(data);
+  //   setData(data)
+  // }, [products])
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
-      field: "title",
-      headerName: "Product",
+      field: "username",
+      headerName: "Username",
       width: 300,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.title}
+            <img 
+              className="productListImg" 
+              style={{ border: "1px solid #ddd" }}
+              src={params.row.img || "https://cediv.travel/wp-content/uploads/2017/09/no-avatar-3.png"} 
+              alt="" 
+            />
+            {params.row.username}
           </div>
         );
       },
     },
-    { field: "brand", headerName: "Brand", width: 120 },
+    { field: "email", headerName: "Email", width: 300 },
     {
-      field: "categories",
-      headerName: "Categories",
-      width: 140,
-      renderCell: (params) => {
-        const categories = params.row.categories.split(",");
-        let color = "blue";
-        if (categories[1] === "women") {
-          color = "pink";
-        } else if (categories[1] === "unisex"){
-          color = "black";
-        }
-        return (
-          <>
-            {/* <Tag color="">{categories[0]}</Tag> */}
-            <Tag color={color}>{categories[1]}</Tag>
-          </>
-        )
-      }
-    },
-    {
-      field: "color",
-      headerName: "Color",
+      field: "isAdmin",
+      headerName: "Admin",
       width: 100,
       renderCell: (params) => {
         return (
-          <Tag style={params.row.color === "white" ? {
-            color: "#999", borderColor: "#999"
-          } : {}} color={params.row.color}>{params.row.color}</Tag>
-        );
-      },
-    },
-    {
-      field: "size",
-      headerName: "Size and Stock",
-      width: 300,
-      renderCell: (params) => {
-        return (
-          <>
-            {
-              params.row.size.split(",").map(item => {
-                if (item.includes("(0)")) {
-                  return (
-                    <Tag color="error" key={item}>{item}</Tag>
-                  )
-                } else {
-                  return (
-                    <Tag color="success" style={{ color: "#444" }} key={item}>{item}</Tag>
-                  )
-                }
-              })
-            }
-          </>
-        )
-      }
-    },
-    {
-      field: "price",
-      headerName: "Price ($)",
-      width: 130,
-      renderCell: (params) => {
-        return (
-          <p style={{ textAlign: "right" }}>{params.row.price}</p>
+          params.row.isAdmin === true ? (
+            <Tag color="success">yes</Tag>
+          ) : (
+            <Tag color="error">no</Tag>
+          )
         )
       }
     },
@@ -153,7 +96,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/products/" + params.row._id}>
+            <Link to={"/users/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -169,8 +112,8 @@ export default function UserList() {
   return (
     <div className="productList">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
-        <Link to="/products/create">
+        <h1 className="productTitle">User</h1>
+        <Link to="/users/create">
           <button className="productAddButton">Create</button>
         </Link>
       </div>

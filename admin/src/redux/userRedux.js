@@ -88,7 +88,7 @@ const UsersSlice = createSlice({
             state.isFetching = false;
             state.error = false;
             state.items.push(action.payload);            
-            toast.success(`Add User ${action.payload.id} successfully`, {
+            toast.success(`Add new user successfully`, {
                 position: "bottom-right"
             })
         },

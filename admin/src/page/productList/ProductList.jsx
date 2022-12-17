@@ -28,7 +28,7 @@ export default function ProductList() {
         // console.log(order._id);   
         const a = order.products.find(product => {
           // console.log(product._id.split("#")[0], " ", id);
-          return product._id.split("#")[0] === id
+          return product?._id.split("#")[0] === id
         })
         return a;
       }
@@ -53,7 +53,7 @@ export default function ProductList() {
     const data = products.map((item) => ({
       ...item,
       categories: item.categories.join(","),
-      size: Object.entries(item.size).map(([size, stock])=> {
+      size: item.size && Object.entries(item.size).map(([size, stock])=> {
         return `${size} (${stock})`
       }).join(","),
     }))
@@ -85,7 +85,7 @@ export default function ProductList() {
       headerName: "Categories",
       width: 140,
       renderCell: (params) => {
-        const categories = params.row.categories.split(",");
+        const categories = params.row.categories?.split(",");
         let color = "blue";
         if (categories[1] === "women") {
           color = "pink";
@@ -120,7 +120,7 @@ export default function ProductList() {
         return (
           <>
             {
-              params.row.size.split(",").map(item => {
+              params.row.size?.split(",").map(item => {
                 if (item.includes("(0)")) {
                   return (
                     <Tag color="error" key={item}>{item}</Tag>

@@ -102,7 +102,7 @@ const productsSlice = createSlice({
             state.isFetching = false;
             state.error = false;
             state.items.push(action.payload);            
-            toast.success(`Add product ${action.payload.id} successfully`, {
+            toast.success(`Add new product successfully`, {
                 position: "bottom-right"
             })
         },

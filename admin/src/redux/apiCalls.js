@@ -3,6 +3,7 @@ import { publicRequest, userRequest } from "../requestMethod";
 import { loginFailure, loginStart, loginSuccess, logoutFailure, logoutStart, logoutSuccess, registerFailure, registerStart, registerSuccess } from "./authRedux";
 import { getOrdersFailure, getOrdersStart, getOrdersSuccess } from "./orderRedux";
 import { addProductFailure, addProductStart, addProductSuccess, deleteProductFailure, deleteProductStart, deleteProductSuccess, getProductsFailure, getProductsStart, getProductsSuccess, updateProductFailure, updateProductStart, updateProductSuccess } from "./productRedux";
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, getUsersFailure, getUsersStart, getUsersSuccess } from "./userRedux";
 
 export const login = async (dispatch, user, navigate, messageApi) => {
     dispatch(loginStart());
@@ -155,4 +156,26 @@ export const getAllOrders = async (dispatch) => {
 export const addSizeAndStock = async (messageApi, product, dispatch) => {
     messageCall(messageApi, "error", "Size must be number");
 
+}
+
+export const getAllUsers = async (dispatch) => {
+    dispatch(getUsersStart());
+    try {
+        const res = await userRequest.get("/users");
+        dispatch(getUsersSuccess(res.data))
+    } catch (err) {
+        console.log(err);
+        dispatch(getUsersFailure());
+    }
+}
+
+export const deleteUser = async (dispatch, userId) => {
+    dispatch(deleteUserStart());
+    try {
+        const res = await userRequest.delete(`/users/${userId}`);
+        dispatch(deleteUserSuccess(userId))
+    } catch (err) {
+        console.log(err);
+        dispatch(deleteUserFailure());
+    }
 }
