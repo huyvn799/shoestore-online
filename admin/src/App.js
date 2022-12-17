@@ -2,25 +2,44 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-import Home from "./page/home/Home";
-import UserList from "./page/userList/UserList";
-import User from "./page/user/User";
-import NewUser from "./page/newUser/NewUser";
-import ProductList from "./page/productList/ProductList";
-import Product from "./page/product/Product";
-import NewProduct from "./page/newProduct/NewProduct";
-import Login from "./page/login/Login";
+import { Outlet, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { isAdmin as admin } from "./requestMethod";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrders } from "./redux/apiCalls";
 
 function App() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (!admin) {
+  //     navigate("/login");
+  //   }
+  // }, [admin])
+
+  // console.log(admin);
+  const user = useSelector((state) => state.auth.login.currentUser);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    } 
+  }, [user])
+
   return (
-    <div>
-      <Topbar />
-      <div className="container">
-        <Sidebar />
-        <Outlet/>
+    admin && (
+      <div>
+        <ToastContainer/>
+        <Topbar />
+        <div className="container">
+          <Sidebar />
+          <div className="outlet"><Outlet/></div>
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

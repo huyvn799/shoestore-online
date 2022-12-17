@@ -97,29 +97,76 @@ const orderController = {
         }
     },
 
-    // GET MONTHLY INCOME
+    // GET INCOME IN 2 LATEST MONTHS
     getOrdersIncome: async (req, res) => {
+        const productId = req.query.pid; 
+
+        //? date: t9 -> lastMonth: t8 -> previousMonth: t7
+        const date = new Date();
+        const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+        const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
         try { 
-            //? date: t9 -> lastMonth: t8 -> previousMonth: t7
-            const date = new Date();
-            const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-            const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
             const income = await Order.aggregate([
-                { $match: { createdAt: { $gte: previousMonth }}},
+                { $match: { 
+                    createdAt: { $gte: previousMonth },
+                    // ...(productId && {
+                    //     products: {$elemMatch: {productId: productId}}
+                    // }) 
+                }},
                 { 
                     $project: { 
                         month: { $month: "$createdAt"},
                         year: { $year: "$createdAt"},
-                        sales: "$amount",
+                        sales: "$total",
                     }
                 },
                 { 
                     $group: { 
                         _id: "$month",
-                        _id: ["$month", "$year"],
+                        _id: ["$year", "$month"],
                         total: { $sum: "$sales"}
                     }   
+                },
+                { 
+                    $sort: { 
+                        _id: 1
+                    }
+                }
+            ]);
+
+            res.status(200).json(income);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // GET MONTHLY INCOME IN YEAR
+    getIncomeInYear: async (req, res) => {
+        try { 
+            const date = new Date();
+            const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+            
+            const income = await Order.aggregate([
+                { $match: { createdAt: { $gte: lastYear }}},
+                { 
+                    $project: { 
+                        month: { $month: "$createdAt"},
+                        year: { $year: "$createdAt"},
+                        sales: "$total",
+                    }
+                },
+                { 
+                    $group: { 
+                        _id: "$month",
+                        _id: ["$year", "$month"],
+                        total: { $sum: "$sales"}
+                    }   
+                },
+                { 
+                    $sort: { 
+                        _id: 1
+                    }
                 }
             ]);
 

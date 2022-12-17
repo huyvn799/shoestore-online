@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 const Product = () => {
 
   const user = useSelector(state => state.auth.login.currentUser);
-  const allProducts = useSelector(state => state.product.items);
+  const allProducts = useSelector(state => state.product?.items);
   const cart = useSelector(state => state.cart);
 
   const {id} = useParams();
@@ -39,7 +39,7 @@ const Product = () => {
   // console.log(allProducts);
 
   useEffect(() => {
-    const currentProduct = allProducts.find(product => product._id === id);
+    const currentProduct = allProducts.find(product => product?._id === id);
     const seriesCode = currentProduct?.seriesCode;
     
     document.title = currentProduct.title;
@@ -49,7 +49,7 @@ const Product = () => {
     setQuantity(1);
     
 
-    const products = allProducts.filter(product => product.seriesCode === seriesCode).sort((a, b) => b - a);
+    const products = allProducts.filter(product => product?.seriesCode === seriesCode).sort((a, b) => b - a);
     // console.log(products);
 
     setProductsInSeries(products);
@@ -106,7 +106,7 @@ const Product = () => {
   const handleSizeChange = (e) => {
     setSize(e.target.value);
     setQuantity(1);
-    setMaxQuantity(product.size[size]);
+    setMaxQuantity(product?.size[size]);
   }
   console.log(size);
   console.log(maxQuantity);
@@ -114,8 +114,8 @@ const Product = () => {
   const handleAddToCart = () => { 
     if (user) {
       // update cart
-      const title = product.title+"-"+size;
-      const _id = product._id+"#"+size;
+      const title = product?.title+"-"+size;
+      const _id = product?._id+"#"+size;
       // console.log({ ...product,_id, title, quantity, size, color});
       dispatch(addToCart({ ...product, _id, title, quantity, size, color}));
 
@@ -160,13 +160,13 @@ const Product = () => {
               {
                 productsInSeries && productsInSeries?.map((product) => (
                   <Link
-                    to={`/product/${product._id}`}
+                    to={`/product/${product?._id}`}
                     className={cx(
                       "product-info__filter__color",
-                      `product-info__filter__color--${product.color}`,
-                      product.color === color ? `product-info__filter__color--${product.color}--active` : ""
+                      `product-info__filter__color--${product?.color}`,
+                      product?.color === color ? `product-info__filter__color--${product?.color}--active` : ""
                     )}
-                    key={product.color}
+                    key={product?.color}
                     // onClick={handleColorChange}
                   ></Link>
                 ))

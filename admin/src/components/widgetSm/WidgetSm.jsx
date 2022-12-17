@@ -1,18 +1,20 @@
 import "./widgetSm.css";
-import { Visibility } from "@material-ui/icons";
+import { Visibility } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethod";
 
-const WidgetSmListitem = () => {
+const WidgetSmListitem = ({user}) => {
   return (
     <>
       <li className="widgetSmListItem">
         <img
-          src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          src={user.img || "https://cediv.travel/wp-content/uploads/2017/09/no-avatar-3.png"}
           alt=""
           className="widgetSmImg"
         />
         <div className="widgetSmUser">
-          <span className="widgetSmUsername">Tuan Nguyen</span>
-          <span className="widgetSmUserTitle">Software Engineer</span>
+          <span className="widgetSmUsername">{user.username}</span>
+          {/* <span className="widgetSmUserTitle">Software Engineer</span> */}
         </div>
         <button className="widgetSmButton">
           <Visibility className="widgetSmIcon" />
@@ -24,22 +26,30 @@ const WidgetSmListitem = () => {
 };
 
 export default function WidgetSm() {
+  const [users, setUsers ] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await userRequest.get("/users?new=true");
+        setUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getUsers();
+  }, [])
+
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
-        <WidgetSmListitem />
+        {
+          users.map(user => (
+            <WidgetSmListitem key={user._id} user={user}/>
+          ))
+        }
       </ul>
     </div>
   );

@@ -98,7 +98,9 @@ const Navbar = () => {
               className={cx("nav-search_input")}
               type="text"
             />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            <Link to="/products">
+              <Search style={{ color: "gray", fontSize: 16 }} />
+            </Link>
           </div>
         </div>
         <div className={cx("nav-center")}>

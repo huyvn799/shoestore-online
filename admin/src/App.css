@@ -8,3 +8,8 @@
     text-decoration: none;
     color: inherit;
 }
+
+.outlet {
+    padding: 20px;
+    flex: 4;
+}

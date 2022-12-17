@@ -78,7 +78,7 @@ export default function Sidebar() {
                 My profile
               </li>
             </Link>
-            <Link to="/customer/notification" >
+            {/* <Link to="/customer/notification" >
               <li 
                 className={ pathname === "notification" ? "sidebarListItem active" : "sidebarListItem"}
               >
@@ -93,7 +93,7 @@ export default function Sidebar() {
                 <TrendingUp className="sidebarIcon" />
                 My address
               </li>
-            </Link>
+            </Link> */}
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -107,7 +107,7 @@ export default function Sidebar() {
                 My order
               </li>
             </Link>
-            <Link to="/customer/wishlist" >
+            {/* <Link to="/customer/wishlist" >
               <li 
                 className={ pathname === "wishlist" ? "sidebarListItem active" : "sidebarListItem"}
               >
@@ -115,10 +115,6 @@ export default function Sidebar() {
                 Wishlist
               </li>
             </Link>
-            {/* <li 
-                      achMoney className="sidebarIcon" />
-              SsidebarListItem active xem
-sidebarListItem            </li> */}
             <Link to="/customer/review" >
               <li 
                 className={ pathname === "review" ? "sidebarListItem active" : "sidebarListItem"}
@@ -126,7 +122,7 @@ sidebarListItem            </li> */}
                 <CommentOutlined className="sidebarIcon" />
                 My review
               </li>
-            </Link>
+            </Link> */}
           </ul>
         </div>
 

@@ -1,7 +1,7 @@
-.product {
+/* .product {
     flex: 4;
     padding: 20px;
-  }
+  } */
   
   .productTitleContainer {
     display: flex;
@@ -19,19 +19,26 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  .productAddButton:hover {
+    background-color: rgba(0, 128, 128, 0.8)
+  }
   
   .productTop {
     display: flex;
   }
   
-  .productTopLeft,
+  .productTopLeft {
+    flex: 1;
+    display: none;
+  }
   .productTopRight {
     flex: 1;
   }
   
   .productTopRight {
     padding: 20px;
-    margin: 20px;
+    /* margin: 20px; */
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   }
@@ -58,13 +65,56 @@
   }
   
   .productInfoItem {
-    width: 150px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
   }
   
+  .productInfoKey {
+    margin-right: 10px;
+  }
+
   .productInfoValue {
     font-weight: 300;
+  }
+
+  .productInfoValue.color {
+    
+    width: 25px;
+    height: 25px;
+    border-radius:  50%;
+    background-color: black;
+}
+  
+  .productInfoValue.color.black {
+    background-color: black;
+  }
+  .productInfoValue.color.red {
+    background-color: red;
+  }
+  .productInfoValue.color.orange {
+    background-color: orange;
+  }
+  .productInfoValue.color.yellow {
+    background-color: yellow;
+  }
+  .productInfoValue.color.green {
+    background-color: green;
+  }
+  .productInfoValue.color.blue {
+    background-color: blue;
+  }
+  .productInfoValue.color.white {
+    background-color: white;
+    border: 1px solid gray;
+  }
+  .productInfoValue.color.purple {
+    background-color: purple;
+  }
+  .productInfoValue.color.gray {
+    background-color: gray;
+  }
+  .productInfoValue.color.pink {
+    background-color: pink;
   }
   
   .productBottom {
@@ -82,6 +132,8 @@
   .productFormLeft {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    padding-right: 20px;
   }
   
   .productFormLeft > label {
@@ -89,11 +141,25 @@
     color: gray;
   }
   
+  .productFormInput {
+    margin-bottom: 6px;
+  }
+
+  .productFormSelect {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .productFormSelectInput {
+    margin-right: 10px;
+    
+  }
+
   .productFormLeft > input {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px;
     border: none;
     padding: 5px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid gray; */
   }
   
   .productFormLeft >select{
@@ -101,14 +167,15 @@
   }
   
   .productUploadImg{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 10px;
     object-fit: cover;
     margin-right: 20px;
   }
   
   .productFormRight{
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -123,8 +190,13 @@
     border: none;
     padding: 5px;
     border-radius: 5px;
-    background-color: darkblue;
+    background-color: teal;
     color:white;
     font-weight: 600;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+  }
+  .productButton:hover {
+    background-color: rgba(0, 128, 128, 0.8)
   }

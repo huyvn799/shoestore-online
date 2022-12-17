@@ -62,7 +62,7 @@ const userController = {
             const query = req.query.new;
 
             const users = query
-                ? await User.find().sort({ _id: -1 }).limit(5)
+                ? await User.find().sort({ createdAt: -1 }).limit(5)
                 : await User.find();
 
             res.status(200).json(users);
@@ -94,10 +94,13 @@ const userController = {
                         // month: "$year",
                         total: { $sum: 1 }
                     }
+                },
+                { 
+                    $sort: { 
+                        _id: 1
+                    }
                 }
             ]);
-            
-
 
             res.status(200).json(data);
 

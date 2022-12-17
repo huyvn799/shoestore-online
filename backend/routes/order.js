@@ -3,8 +3,11 @@ const middlewareController = require("../controllers/middlewareController");
 const orderController = require("../controllers/orderController");
 
 
-// GET MONTHLY INCOME
-router.get("/income", middlewareController.verifyTokenOnlyAdmin, orderController.getOrdersIncome);
+// GET INCOME IN 2 LATEST MONTH
+router.get("/income/latest", middlewareController.verifyTokenOnlyAdmin, orderController.getOrdersIncome);
+
+// GET MONTHLY INCOME IN YEAR
+router.get("/income/year", middlewareController.verifyTokenOnlyAdmin, orderController.getIncomeInYear);
 
 // CREATE ORDER
 router.post("/", middlewareController.verifyToken, orderController.addOrder);

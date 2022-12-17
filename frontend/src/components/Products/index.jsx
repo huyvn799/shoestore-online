@@ -38,7 +38,7 @@ const Products = ({ category, filters, sort }) => {
   useEffect(() => {
       setFilteredProducts(
         products?.filter((attr) =>
-          Object.entries(filters).every(([key, values]) => {
+          filters && Object.entries(filters).every(([key, values]) => {
             // console.log("[keys]", attr[key]);
             // console.log("[values]", values);
             // console.log("[array]", Array.isArray(attr[key]));

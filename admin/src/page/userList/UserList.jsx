@@ -1,42 +1,150 @@
 import "./userList.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DeleteOutline } from "@mui/icons-material";
+import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect} from "react";
+import { deleteProduct, getAllProducts, getAllOrders } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { Tag } from "antd";
+import { toast } from "react-toastify";
 
 export default function UserList() {
-  const [data, setData] = useState(userRows);
+  const products = useSelector(state => state.product.items);
+  const orders = useSelector(state => state.order.items);
+  const [data, setData] = useState(products);
+  // const [data, setData] = useState(productRows);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAllProducts(dispatch);
+    getAllOrders(dispatch);
+  }, [dispatch])
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+
+    // kiểm tra sản phẩm có trong order ko?
+    const checkOrder = orders.find(order => {
+        // console.log(order._id);   
+        const a = order.products.find(product => {
+          // console.log(product._id.split("#")[0], " ", id);
+          return product._id.split("#")[0] === id
+        })
+        return a;
+      }
+    )
+
+    if (checkOrder) {
+      toast.error(`Not allowed to delete. This product is in an order.`, {
+          position: "bottom-right"
+      })
+    } else {
+      deleteProduct(dispatch, id);
+    }
+
+    // setData(data.filter((item) => item.id !== id));
+
+
+    // deleteProduct(dispatch, id);
   };
 
+  useEffect(() => {
+
+    const data = products.map((item) => ({
+      ...item,
+      categories: item.categories.join(","),
+      size: Object.entries(item.size).map(([size, stock])=> {
+        return `${size} (${stock})`
+      }).join(","),
+    }))
+
+    // console.log(data);
+    setData(data)
+  }, [products])
+
+  console.log(products);
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
-      field: "user",
-      headerName: "User",
-      width: 200,
+      field: "title",
+      headerName: "Product",
+      width: 300,
       renderCell: (params) => {
         return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
+          <div className="productListItem">
+            <img className="productListImg" src={params.row.img} alt="" />
+            {params.row.title}
           </div>
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "brand", headerName: "Brand", width: 120 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      field: "categories",
+      headerName: "Categories",
+      width: 140,
+      renderCell: (params) => {
+        const categories = params.row.categories.split(",");
+        let color = "blue";
+        if (categories[1] === "women") {
+          color = "pink";
+        } else if (categories[1] === "unisex"){
+          color = "black";
+        }
+        return (
+          <>
+            {/* <Tag color="">{categories[0]}</Tag> */}
+            <Tag color={color}>{categories[1]}</Tag>
+          </>
+        )
+      }
     },
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
+      field: "color",
+      headerName: "Color",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <Tag style={params.row.color === "white" ? {
+            color: "#999", borderColor: "#999"
+          } : {}} color={params.row.color}>{params.row.color}</Tag>
+        );
+      },
+    },
+    {
+      field: "size",
+      headerName: "Size and Stock",
+      width: 300,
+      renderCell: (params) => {
+        return (
+          <>
+            {
+              params.row.size.split(",").map(item => {
+                if (item.includes("(0)")) {
+                  return (
+                    <Tag color="error" key={item}>{item}</Tag>
+                  )
+                } else {
+                  return (
+                    <Tag color="success" style={{ color: "#444" }} key={item}>{item}</Tag>
+                  )
+                }
+              })
+            }
+          </>
+        )
+      }
+    },
+    {
+      field: "price",
+      headerName: "Price ($)",
+      width: 130,
+      renderCell: (params) => {
+        return (
+          <p style={{ textAlign: "right" }}>{params.row.price}</p>
+        )
+      }
     },
     {
       field: "action",
@@ -45,12 +153,12 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+            <Link to={"/products/" + params.row._id}>
+              <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              className="productListDelete"
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -59,13 +167,31 @@ export default function UserList() {
   ];
 
   return (
-    <div className="userList">
+    <div className="productList">
+      <div className="productTitleContainer">
+        <h1 className="productTitle">Product</h1>
+        <Link to="/products/create">
+          <button className="productAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={data}
+        // rows={products}
         disableSelectionOnClick
         columns={columns}
+        getRowId={row => row._id}
         pageSize={8}
-        checkboxSelection
+        // checkboxSelection
+        components={{ Toolbar: GridToolbar }}
+        componentsProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 },
+          },
+        }}
+        // disableColumnFilter
+        disableColumnSelector
+        disableDensitySelector
       />
     </div>
   );

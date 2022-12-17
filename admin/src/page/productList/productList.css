@@ -1,7 +1,18 @@
 .productList{
-    flex: 4;
+    /* flex: 4; */
+    display: flex;
+    flex-direction: column;
 }
 
+.productTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .css-204u17-MuiDataGrid-main {
+    height: 500px;
+  }
 .productListItem{
     display: flex;
     align-items: center;

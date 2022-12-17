@@ -13,26 +13,31 @@ import ProductList from "./page/productList/ProductList";
 import Product from "./page/product/Product";
 import NewProduct from "./page/newProduct/NewProduct";
 import Login from "./page/login/Login";
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Provider> */}
-      <Router>
-        <Routes>
-          <Route path="/" element={<App />} >
-            <Route path="/" element={<Home />} />
-            <Route path="/users" element={<UserList />} />
-            <Route path="/user/:userId" element={<User />} />
-            <Route path="/newUser" element={<NewUser />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/product/:productId" element={<Product />} />
-            <Route path="/newproduct" element={<NewProduct />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Router>
-    {/* </Provider> */}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<App />} >
+              <Route path="/" element={<Home />} />
+              <Route path="users" element={<UserList />} />
+              <Route path="users/:userId" element={<User />} />
+              <Route path="users/create" element={<NewUser />} />
+              <Route path="products" element={<ProductList />} />
+              <Route path="products/:productId" element={<Product />} />
+              <Route path="products/create" element={<NewProduct />} />
+              
+            </Route>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Router>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 

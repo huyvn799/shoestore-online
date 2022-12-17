@@ -3,44 +3,25 @@ import styles from "./Login.module.scss";
 import { Link, useNavigate, redirect } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-// import { login } from "~/redux/apiCalls";
+import { login } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { loginStart } from "~/redux/authRedux";
-// import useMessageApi from "~/messageApi";
+import { loginStart } from "../../redux/authRedux";
+import useMessageApi from "../../messageApi";
 
 const cx = classNames.bind(styles);
 
 const Login = () => {
-  // const navigate = useNavigate();
-
-  // const [user, setUser] = useState(true);
-  // const user = useSelector(state => state.auth.login.currentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.login.currentUser);
 
   useEffect(() => {
-    document.title = "SIGN IN"
+    document.title = "SIGN IN - ADMIN"
   }, [])
 
-  // useEffect(() => {
-  //   if (user) {
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 1500);
-  //   }
-  // }, [user])
-
-  // const [username, setUsername] = useState();
-  // const [password, setPassword] = useState();
-  // const dispatch = useDispatch();
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-
-  //   login(dispatch, { username, password });
-  // }
-
-//   const [messageApi, contextMsg] = useMessageApi();
+  const [messageApi, contextMsg] = useMessageApi();
 
   const formik = useFormik({
     initialValues: {
@@ -52,26 +33,22 @@ const Login = () => {
       password: Yup.string().required("Required").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, "Password must be at least 8 characters, one letter and one number"),
     }),
     onSubmit: (values) => {
-    //   login(dispatch, values, navigate, messageApi);
-      // formik.resetForm();
+      login(dispatch, values, navigate, messageApi);
+      formik.resetForm();
     },
   })
 
   useEffect(() => {
-    // dispatch(loginStart());
+    dispatch(loginStart());
   }, [])
 
-  // const { error, errMsg } = useSelector(state => state.auth.login);
-  // console.log(useSelector(state => state.auth.login));
-
-  const error = "";
-  const errMsg = "";
+  const { error, errMsg } = useSelector(state => state.auth.login);
 
   return (
     <div className={cx("login-container")}>
-      {/* {contextMsg} */}
+      {contextMsg}
       <div className={cx("login-wrapper")}>
-        <h1 className={cx("login-title")}>SIGN IN</h1>
+        <h1 className={cx("login-title")}>SPORTY SHOES - ADMIN</h1>
         <form onSubmit={formik.handleSubmit} className={cx("login-form")}>
           <input className={cx("login-input")} placeholder="Username" 
             onChange={formik.handleChange}
@@ -103,14 +80,14 @@ const Login = () => {
               type="submit"
             >SIGN IN</button>
             
-            <div className={cx("login-otherlink")}>
+            {/* <div className={cx("login-otherlink")}>
               <Link className={cx("login-link")} to=".">
                 Forgot your password?
               </Link>
               <Link className={cx("login-link")} to="/register">
                 Create a new account
               </Link>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>
