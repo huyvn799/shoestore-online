@@ -8,6 +8,9 @@ const router = require("express").Router();
 router.get("/stats", middlewareController.verifyTokenOnlyAdmin, userController.getUserStats);
 
 // UPDATE USER
+router.post("/", middlewareController.verifyTokenOnlyAdmin, userController.addUser);
+
+// UPDATE USER
 router.put("/:id", middlewareController.verifyTokenAndAdminAuth, userController.updateUser);
 
 // DELETE USER

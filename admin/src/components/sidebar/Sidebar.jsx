@@ -19,7 +19,7 @@ import { useEffect } from "react";
 export default function Sidebar() {
   const location = useLocation();
 
-  console.log(location.pathname.split("/"));
+  // console.log(location.pathname.split("/"));
   useEffect(() => {
     switch (location.pathname.split("/")[1]) {
       case "": {

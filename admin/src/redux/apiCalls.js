@@ -1,9 +1,9 @@
-import messageApi, { messageCall } from "../messageApi";
+import { messageCall } from "../messageApi";
 import { publicRequest, userRequest } from "../requestMethod";
 import { loginFailure, loginStart, loginSuccess, logoutFailure, logoutStart, logoutSuccess, registerFailure, registerStart, registerSuccess } from "./authRedux";
 import { getOrdersFailure, getOrdersStart, getOrdersSuccess } from "./orderRedux";
 import { addProductFailure, addProductStart, addProductSuccess, deleteProductFailure, deleteProductStart, deleteProductSuccess, getProductsFailure, getProductsStart, getProductsSuccess, updateProductFailure, updateProductStart, updateProductSuccess } from "./productRedux";
-import { deleteUserFailure, deleteUserStart, deleteUserSuccess, getUsersFailure, getUsersStart, getUsersSuccess } from "./userRedux";
+import { addUserFailure, addUserStart, addUserSuccess, deleteUserFailure, deleteUserStart, deleteUserSuccess, getUsersFailure, getUsersStart, getUsersSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "./userRedux";
 
 export const login = async (dispatch, user, navigate, messageApi) => {
     dispatch(loginStart());
@@ -120,16 +120,30 @@ export const addProduct = async (dispatch, newProduct) => {
         console.log(err);
         dispatch(addProductFailure());
     }
-    finally {
-        return {hello: "baby"};
-    }
 }
 
-export const validateAddProduct = (messageApi, product) => {
+export const validateAddProduct = (messageApi, product, file) => {
     const checkEmpty = Object.entries(product).find(([attr, value]) => {
         console.log("[attr]", attr);
         console.log("[value]", value);
         if (value === 0) {
+            return false;
+        } else {
+            return !value;
+        }
+    })
+    if (checkEmpty || !file) {
+        messageCall(messageApi, "error", "All fields are not empty")
+        return false;
+    }
+    return true;
+}
+
+export const validateAddUser = (messageApi, user) => {
+    const checkEmpty = Object.entries(user).find(([attr, value]) => {
+        // console.log("[attr]", attr);
+        // console.log("[value]", value);
+        if (value === 0 || attr === "isAdmin" || attr === "img") {
             return false;
         } else {
             return !value;
@@ -153,9 +167,38 @@ export const getAllOrders = async (dispatch) => {
     }
 }
 
-export const addSizeAndStock = async (messageApi, product, dispatch) => {
-    messageCall(messageApi, "error", "Size must be number");
+export const addSizeAndStock = (messageApi, product, size, stock) => {
+    if (!Number.isInteger(Number(size))) {
+        messageCall(messageApi, "error", "Size must be number");
+        return;
+    } else {
 
+        console.log(product);
+        const updatedProduct = JSON.parse(JSON.stringify(product));
+        console.log(size);
+        console.log(stock);
+    
+        const sizeArr = Object.entries(updatedProduct.size);
+        const sizeIndex = sizeArr.findIndex(([s, q]) => s === size)
+    
+        if (sizeIndex !== -1) {
+            updatedProduct.size[size] += stock
+        } else {
+            updatedProduct.size = {
+                ...updatedProduct.size,
+                [size]: stock 
+            };
+        }
+        console.log((new Date()).toISOString());
+        
+        updatedProduct.updates.push({
+            updateTime: (new Date()).toISOString(),
+            quantity: stock
+        })
+        // console.log(updatedProduct);
+
+        return updatedProduct;
+    }
 }
 
 export const getAllUsers = async (dispatch) => {
@@ -177,5 +220,28 @@ export const deleteUser = async (dispatch, userId) => {
     } catch (err) {
         console.log(err);
         dispatch(deleteUserFailure());
+    }
+}
+
+export const updateUser = async (dispatch, userId, updatedUser, messageApi) => {
+    dispatch(updateUserStart());
+    try {
+        const res = await userRequest.put(`/users/${userId}`, updatedUser);
+        dispatch(updateUserSuccess({id: userId, user: res.data}));
+    } catch (err) {
+        messageCall(messageApi, "error", err.response.data);
+        dispatch(updateUserFailure());
+    }
+}
+
+export const addUser = async (dispatch, newUser) => {
+    dispatch(addUserStart());
+    try {
+        const res = await userRequest.post(`/users`, newUser);
+        dispatch(addUserSuccess(res.data));
+        
+    } catch (err) {
+        console.log(err);
+        dispatch(addUserFailure());
     }
 }

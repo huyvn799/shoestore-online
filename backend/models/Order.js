@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-    userId: { type: String, required: true },
+    userId: { type: String },
     customerId: { type: String },
     // products: [
     //     { 
@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
     total: { type: Number, required: true },
     discount_amount: { type: Number, default: 0},
     shipping_info: { type: Object, required: true },
-    delivery_status: { type: String, default: "pending" }, // completed, return, not received
+    delivery_status: { type: String, default: "delivering" }, // completed, return, not received
     payment_status: { type: String, required: true },
 
 }, { timestamps: true });

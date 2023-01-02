@@ -40,20 +40,6 @@ export default function UserList() {
     }
   };
 
-  // useEffect(() => {
-
-  //   const data = products.map((item) => ({
-  //     ...item,
-  //     categories: item.categories.join(","),
-  //     size: Object.entries(item.size).map(([size, stock])=> {
-  //       return `${size} (${stock})`
-  //     }).join(","),
-  //   }))
-
-  //   // console.log(data);
-  //   setData(data)
-  // }, [products])
-
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
@@ -66,7 +52,7 @@ export default function UserList() {
             <img 
               className="productListImg" 
               style={{ border: "1px solid #ddd" }}
-              src={params.row.img || "https://cediv.travel/wp-content/uploads/2017/09/no-avatar-3.png"} 
+              src={params.row.img || "https://i.pinimg.com/736x/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg"} 
               alt="" 
             />
             {params.row.username}
@@ -113,9 +99,9 @@ export default function UserList() {
     <div className="productList">
       <div className="productTitleContainer">
         <h1 className="productTitle">User</h1>
-        <Link to="/users/create">
+        {/* <Link to="/users/create">
           <button className="productAddButton">Create</button>
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         rows={data}

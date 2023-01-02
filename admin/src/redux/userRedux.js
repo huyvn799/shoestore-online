@@ -61,11 +61,12 @@ const UsersSlice = createSlice({
         updateUserSuccess: (state, action) => {
             state.items = state.items.map(item => {
                 if (item._id === action.payload.id) {
-                    return action.payload.User
+                    return action.payload.user
                 } else {
                     return item;
                 }
             })
+
             state.isFetching = false;
             state.error = false;
             toast.success(`Update User ${action.payload.id} successfully`, {
@@ -75,7 +76,7 @@ const UsersSlice = createSlice({
         updateUserFailure: (state) => {
             state.isFetching = false;
             state.error = true;
-            toast.error(`Error from Api system.`, {
+            toast.error(`Update user failed`, {
                 position: "bottom-right"
             })
         },

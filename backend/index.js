@@ -61,7 +61,6 @@ app.use("/api/stripe", stripeRoute);
 
 // test();
 
-
 app.listen(process.env.PORT || 5000, () => {
   console.log("Back server is running!");
 });

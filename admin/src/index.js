@@ -15,6 +15,8 @@ import NewProduct from "./page/newProduct/NewProduct";
 import Login from "./page/login/Login";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react"
+import OrderList from "./page/orderList/OrderList";
+import Order from "./page/order/Order";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,7 +33,8 @@ root.render(
               <Route path="products" element={<ProductList />} />
               <Route path="products/:productId" element={<Product />} />
               <Route path="products/create" element={<NewProduct />} />
-              
+              <Route path="orders" element={<OrderList />} />
+              <Route path="orders/:orderId" element={<Order />} />
             </Route>
             <Route path="/login" element={<Login />} />
           </Routes>

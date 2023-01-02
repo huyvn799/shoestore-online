@@ -12,7 +12,7 @@ const WidgetLgTr = ({ order, user }) => {
     <tr className="widgetLgTr">
       <td className="widgetLgUser">
         <img
-          src={user?.img || "https://cediv.travel/wp-content/uploads/2017/09/no-avatar-3.png"}
+          src={user?.img || "https://i.pinimg.com/736x/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg"}
           alt=""
           className="widgetLgImg"
         />

@@ -28,16 +28,16 @@ const Cart = () => {
   }, [])
 
   useEffect(() => {
-    if (!user) {
-      // console.log(user);
-      navigate("/");
-    }
+    // if (!user) {
+    //   // console.log(user);
+    //   navigate("/");
+    // }
   }, [user])
 
   useEffect(() => {
     if (user) {
       // console.log(user);
-      updateCart(user.accessToken, user._id, cart);
+      updateCart( cart, dispatch, user.accessToken, user._id)
       // setTimeout(() => {
       // }, 1000)
     }
@@ -48,7 +48,7 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(resetCart());
-    // updateCart(user.accessToken, user._id, cart);
+    // updateCart( cart, dispatch, user.accessToken, user._id)
   }
 
   return (

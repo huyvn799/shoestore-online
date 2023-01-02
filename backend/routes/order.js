@@ -22,6 +22,7 @@ router.delete("/:id", middlewareController.verifyTokenOnlyAdmin, orderController
 router.get("/:id", middlewareController.verifyTokenAndAdminAuth, orderController.getUserOrders);
 
 // GET ALL ORDERS
-router.get("/", middlewareController.verifyTokenOnlyAdmin, orderController.getAllOrders);
+// router.get("/", middlewareController.verifyTokenOnlyAdmin, orderController.getAllOrders);
+router.get("/", orderController.getAllOrders);
 
 module.exports = router;

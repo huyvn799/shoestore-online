@@ -29,14 +29,14 @@ const CartProduct = ({cartProduct, user, cart}) => {
   const handleDecreaseCart = (cartItem) => {
     handleQuantity("dec");
     dispatch(decreaseCart(cartItem));
-    // updateCart(user.accessToken, user._id, cart);
+    // updateCart( cart, dispatch, user.accessToken, user._id)
 
   }
 
   const handleIncreaseCart = (cartItem) => {
     handleQuantity("inc");
     dispatch(addToCart(cartItem));
-    // updateCart(user.accessToken, user._id, cart);
+    // updateCart( cart, dispatch, user.accessToken, user._id)
   }
 
   return (

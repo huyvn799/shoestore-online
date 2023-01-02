@@ -112,23 +112,30 @@ const Product = () => {
   console.log(maxQuantity);
 
   const handleAddToCart = () => { 
-    if (user) {
-      // update cart
-      const title = product?.title+"-"+size;
-      const _id = product?._id+"#"+size;
-      // console.log({ ...product,_id, title, quantity, size, color});
-      dispatch(addToCart({ ...product, _id, title, quantity, size, color}));
+    const title = product?.title+"-"+size;
+    const _id = product?._id+"#"+size;
+    // console.log({ ...product,_id, title, quantity, size, color});
+    dispatch(addToCart({ ...product, _id, title, quantity, size, color}));
 
-      // updateCart(user.accessToken, user._id, cart)
-      // console.log(cart);
-    } else {
-      modalInfo("add to your cart", navigate)
-    }
+    
+    // if (user) {
+    //   // update cart
+    //   const title = product?.title+"-"+size;
+    //   const _id = product?._id+"#"+size;
+    //   // console.log({ ...product,_id, title, quantity, size, color});
+    //   dispatch(addToCart({ ...product, _id, title, quantity, size, color}));
+
+    //   // updateCart( cart, dispatch, user.accessToken, user._id)
+
+    //   // console.log(cart);
+    // } else {
+    //   modalInfo("add to your cart", navigate)
+    // }
   }
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        updateCart(user.accessToken, user._id, cart)
+        updateCart(cart, dispatch, user.accessToken, user._id)
       }, 1000)
     }
     return () => {

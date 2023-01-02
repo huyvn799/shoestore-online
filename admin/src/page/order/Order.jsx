@@ -16,7 +16,7 @@ import firebaseApp from "../../firebase";
 
 const { Option } = Select;
 
-export default function Product() {
+export default function Order() {
   const {productId} = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product.items.find(product => product._id === productId));
@@ -42,26 +42,26 @@ export default function Product() {
     ], []
   )
 
-  // useEffect(() => {
-  //   const getProductStats = async() => {
-  //     try {
-  //       const res = await userRequest.get("/orders/income/latest?pid=" + productId);
-  //       console.log(res.data);
-  //       const stats = res.data.map(item => (
-  //           {
-  //             name: MONTHS[item._id[1] - 1],
-  //             "Sales": item.total
-  //           }
-  //       ))
-  //       setProductStats(stats);
+  useEffect(() => {
+    const getProductStats = async() => {
+      try {
+        const res = await userRequest.get("/orders/income/latest?pid=" + productId);
+        console.log(res.data);
+        const stats = res.data.map(item => (
+            {
+              name: MONTHS[item._id[1] - 1],
+              "Sales": item.total
+            }
+        ))
+        setProductStats(stats);
 
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
-  //   getProductStats();
-  // }, [MONTHS]);
+    getProductStats();
+  }, [MONTHS]);
 
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function Product() {
 
     // console.log(updatedProduct);
 
-    const check = validateAddProduct(messageApi, updatedProduct, true);
+    const check = validateAddProduct(messageApi, updatedProduct);
 
     if (check) {
       if (file) {
@@ -196,16 +196,11 @@ export default function Product() {
     console.log("[size]",sizeModal);
     console.log("[stock]",stockModal);
 
-    const  updatedSizeProduct = addSizeAndStock(messageApi, product, sizeModal, stockModal);
-
-    if (updatedSizeProduct) {
-      console.log(updatedSizeProduct);
-      updateProduct(dispatch, product._id, updatedSizeProduct);
-
-      setVisible(false);
-      setSizeModal("")
-      setStockModal(0)
-    } 
+    addSizeAndStock(messageApi, product, dispatch);
+    
+    // setVisible(false);
+    // setSizeModal("")
+    // setStockModal(0)
   };
   
   const handleCancelModal = () => {

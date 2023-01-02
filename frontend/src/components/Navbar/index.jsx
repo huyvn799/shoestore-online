@@ -163,7 +163,7 @@ const Navbar = () => {
               <Link to="/login">
                 <div className={cx("nav-menu__item")}>SIGN IN</div>
               </Link>
-              <div className={cx("nav-menu__item")}
+              {/* <div className={cx("nav-menu__item")}
                 onClick={() => modalInfo("view your cart", navigate)}
               >
                 <Badge
@@ -173,7 +173,19 @@ const Navbar = () => {
                 >
                   <ShoppingCartOutlined />
                 </Badge>
-              </div>
+              </div> */}
+
+              <Link to="/cart">
+                <div className={cx("nav-menu__item")}>
+                  <Badge
+                    badgeContent={quantity}
+                    color="primary"
+                    style={{ color: "teal" }}
+                  >
+                    <ShoppingCartOutlined />
+                  </Badge>
+                </div>
+              </Link>
             </>
           )}
           

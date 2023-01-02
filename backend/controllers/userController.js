@@ -3,8 +3,49 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
 const userController = {
+    // ADD USER
+    addUser: async (req, res) => {
+
+        const usernameDB = await User.findOne({ username: req.body.username });
+        const emailDB = await User.findOne({ email: req.body.email });
+
+        if (usernameDB) {
+            return res.status(404).json("This username has been registered");
+        }
+
+        if (emailDB) {
+            return res.status(404).json("This email has been registered");
+        }
+
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET).toString()
+        });
+    
+        try {
+            const savedUser = await newUser.save();
+            res.status(200).json(savedUser)
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    
+    },
     // UPDATE USER INFO
     updateUser: async (req, res) => {
+
+        const updatingUser = await User.findById(req.params.id);
+        const usernameDB = await User.findOne({ username: req.body.username });
+        const emailDB = await User.findOne({ email: req.body.email });
+
+        if (usernameDB && usernameDB.username !== updatingUser.username) {
+            return res.status(404).json("This username has been registered");
+        }
+
+        if (emailDB && emailDB.email !== updatingUser.email) {
+            return res.status(404).json("This email has been registered");
+        }
+
         // nếu gửi mật khẩu thì mã hóa nó
         // (vừa để bảo mật vừa lưu lại dạng mã hóa vào DB)
         if (req.body.password) {

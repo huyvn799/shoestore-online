@@ -17,7 +17,7 @@ function App() {
   
   useEffect(() => {
     if (user) {
-      // updateCart(user.accessToken, user._id, cart);
+      // updateCart( cart, dispatch, user.accessToken, user._id)
       dispatch(cartFetch(user));
       dispatch(ordersFetch(user));
     }
@@ -26,13 +26,13 @@ function App() {
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        updateCart(user.accessToken, user._id, cart)
+        updateCart(cart, dispatch, user.accessToken, user._id)
       }, 1000)
     }
     return () => {
       console.log("delete");
     }
-  }, [cart, user])
+  }, [cart, dispatch])
 
   return (
     <div className="App">

@@ -28,7 +28,9 @@ export default function NewProduct() {
   const [category, setCategory] = useState("men")
   const [color, setColor] = useState("black")
   const [sizeStock, setSizeStock] = useState([])
+  const [cost, setCost] = useState(0)
   const [price, setPrice] = useState(0)
+  const [profitRate, setProfitRate] = useState(10)
   const [file, setFile] = useState("")
   const [imgPreview, setImgPreview] = useState("");
 
@@ -61,6 +63,17 @@ export default function NewProduct() {
     setSizeStock(values);
   }
 
+  const handleCostInput = (value) => {
+    setCost(value); 
+    setPrice(Math.round(value * (100 + profitRate) / 100));
+  }
+
+  const handleProfitRateChange = (value) => {
+    console.log(value);
+    setProfitRate(value);
+    setPrice(Math.round(cost * (100 + value) / 100));
+  }
+
   const handleFileInput = (e) => {
     console.log(e.target.files);
 
@@ -80,6 +93,14 @@ export default function NewProduct() {
       }
     })
 
+    let totalQuantity = sizeStock.sizes?.reduce((total, {size, stock}) => total + stock, 0);
+
+    let updates = [];
+    updates.push({
+      updateTime: (new Date()).toISOString(),
+      quantity: totalQuantity,
+    })
+
     const newProduct = {
       title,
       desc,
@@ -88,17 +109,18 @@ export default function NewProduct() {
       categories: ["shoe", category],
       color,
       size: sizeProduct,
-      price
+      cost,
+      price,
+      updates
     }
 
-    const check = validateAddProduct(messageApi, newProduct);
+    const check = validateAddProduct(messageApi, newProduct, file);
 
     if (check) {
       const fileName = new Date().getTime() + "_" + file.name;
       const storage = getStorage(firebaseApp);
       
       const storageRef = ref(storage, `images/products/${fileName}`);
-      
 
       // Upload the file and metadata
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -139,6 +161,8 @@ export default function NewProduct() {
             setCategory("men")
             setColor("black")
             setSizeStock([])
+            setProfitRate(10)
+            setCost(0)
             setPrice(0)
             setFile("")
             setImgPreview("")
@@ -300,9 +324,32 @@ export default function NewProduct() {
                   </Select>
               </div>
               <div className="productFormSelectInput">
-                <label style={{ display: "block" }}>Price ($)</label>
+                <label style={{ display: "block" }}>Cost ($)</label>
                 <InputNumber min={0} style={{ width: "100px" }} defaultValue={0}
-                  onChange={(value) => setPrice(value)} value={price}
+                  onChange={handleCostInput} value={cost}
+                />
+              </div>
+              <div className="productFormSelectInput">
+                <label>Profit Rate</label>
+                <Select
+                    style={{
+                      width: '100%',
+                    }}
+                    onChange={handleProfitRateChange}
+                    defaultValue={10}
+                  >
+                    <Select.Option value={10}>10%</Select.Option>
+                    <Select.Option value={20}>20%</Select.Option>
+                    <Select.Option value={30}>30%</Select.Option>
+                    <Select.Option value={40}>40%</Select.Option>
+                    <Select.Option value={50}>50%</Select.Option>
+                  </Select>
+              </div>
+              <div className="productFormSelectInput">
+                <label style={{ display: "block" }}>Price ($)</label>
+                <InputNumber disabled min={0} style={{ width: "100px" }} defaultValue={0}
+                  // onChange={(value) => setPrice(value)} 
+                  value={price}
                 />
               </div>
               

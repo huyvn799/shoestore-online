@@ -19,12 +19,14 @@ const CartSummary = ({cart}) => {
         try {
           const res = await publicRequest.post("/stripe/checkout", {
               cartItems: cart.cartItems,
-              userId: user._id
-            }, {
+              userId: user ? user._id : "guest"
+            }, 
+            {
               headers: {
-                token: `Bearer ${user.accessToken}`
+                token: user ? `Bearer ${user.accessToken}` : ""
               }
-            })
+            }
+            )
           
             window.location.href = res.data.url;
           

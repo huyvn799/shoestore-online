@@ -71,17 +71,21 @@ export const registerUser = async(user, dispatch, navigate, messageApi) => {
     }
 }
 
-export const updateCart = async(accessToken, userId, cart) => {
-    try { 
-        const res = await publicRequest.put(`/carts/${userId}`, {
-            products: cart?.cartItems,
-            quantity: cart?.cartQuantity,
-            total: cart?.cartTotal
-        }, { 
-            headers: { 
-                token: `Bearer ${accessToken}`
-            }
-        });
+export const updateCart = async(cart, dispatch, accessToken, userId) => {
+    
+    try {
+        // dispatch(resetCart());
+        if (userId) {
+            const res = await publicRequest.put(`/carts/${userId}`, {
+                products: cart?.cartItems,
+                quantity: cart?.cartQuantity,
+                total: cart?.cartTotal
+            }, { 
+                headers: { 
+                    token: `Bearer ${accessToken}`
+                }
+            });
+        } 
         
         // console.log(accessToken, userId);
         // console.log(res.data);

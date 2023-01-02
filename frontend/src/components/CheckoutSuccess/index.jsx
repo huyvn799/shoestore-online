@@ -27,7 +27,7 @@ const CheckoutSuccess = () => {
     navigate("/checkout-success");
     return () => {
       dispatch(resetCart())
-      updateCart(user.accessToken, user._id, cart)
+      updateCart(cart, dispatch, user?.accessToken, user?._id)
     }
   }, [dispatch]);
 

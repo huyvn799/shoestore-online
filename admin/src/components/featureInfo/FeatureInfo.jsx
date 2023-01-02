@@ -39,14 +39,14 @@ export default function FeaturedInfo() {
 
         const latestIncome = res.data.map(item => {
           
-          amounts.push(item.total)
+          amounts.push(item?.total)
           return {
               month: MONTHS[item._id[1] - 1],
               total: (item.total/100).toFixed(2)
             }
         })
         setIncome(latestIncome);
-        setPercent(latestIncome[1].total * 100 / latestIncome[0].total - 100)
+        setPercent(latestIncome[1]?.total * 100 / latestIncome[0]?.total - 100)
       } catch (err) {
         console.log(err);
       }
@@ -75,16 +75,20 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Current Revenue</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">$ {income[1]?.total}</span>
-          <span className="featuredMoneyRate">
-            {Math.round(percent)}%
-            {Math.round(percent) > 0 
-              ? (<ArrowUpward className="featuredIcon" />)
-              : Math.round(percent) < 0 
-                ? (<ArrowDownward className="featuredIcon negative" />)
-                : ("")
-            }
-          </span>
+          <span className="featuredMoney">$ {!income[1] ? income[0]?.total : income[1]?.total}</span>
+          {
+            !Number.isNaN(percent) && (
+              <span className="featuredMoneyRate">
+                {Math.round(percent)}%
+                {Math.round(percent) > 0 
+                  ? (<ArrowUpward className="featuredIcon" />)
+                  : Math.round(percent) < 0 
+                    ? (<ArrowDownward className="featuredIcon negative" />)
+                    : ("")
+                }
+              </span>
+            )
+          }
         </div>
         <span className="featuredSub">Compared to last month</span>
       </div>

@@ -12,7 +12,7 @@ const { countryCodes } = require("../data");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 
-router.post("/checkout", middlewareController.verifyToken, async (req, res) => {
+router.post("/checkout", async (req, res) => {
   
   let metaCustomer = {
     userId: req.body.userId,
@@ -62,9 +62,9 @@ router.post("/checkout", middlewareController.verifyToken, async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     allow_promotion_codes: true,
-    // phone_number_collection: {
-    //   enabled: true,
-    // },
+    phone_number_collection: {
+      enabled: true,
+    },
     // shipping_address_collection: {
     //   allowed_countries: ["US", "VN"]
     // },
@@ -77,8 +77,8 @@ router.post("/checkout", middlewareController.verifyToken, async (req, res) => {
     //   name: "Van Quoc Huy"
     // },
     customer: customer.id,
-    // payment_method_types: ["card"],
-    // shipping_address_collection: { allowed_countries: ["US", "CA"] },
+    payment_method_types: ["card"],
+    shipping_address_collection: { allowed_countries: ["US", "CA", "VN"] },
     // shipping_options: [
     //   {
     //     shipping_rate_data: {
